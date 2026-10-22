@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Referencia opcional, no requerida para integrar la SDK.
+         Los textos habituales siguen el contrato. Copia solo overrides intencionales.
+         Hay claves históricas que no controlan las pantallas Compose actuales.
+         Consulta docs/PERSONALIZACION_TEXTOS.md para conocer el alcance. -->
     <!-- Errores de creación y resultados: consulta docs/ERRORES.md -->
     <string name="identity_error_liveness">No pudimos confirmar tu prueba de vida. Inicia una nueva verificación e inténtalo con buena iluminación.</string>
     <string name="identity_error_face">No pudimos validar tu rostro. Inicia una nueva verificación con tu documento y el rostro descubierto.</string>

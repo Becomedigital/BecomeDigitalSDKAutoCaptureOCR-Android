@@ -195,7 +195,7 @@ Los nombres `clienId`, `DocumetType`, `SUCCES` y `startAuthentication` se conser
 | `nationalIdType`, `nationalIdTypeChoices`, `documentNumber` | Vacíos | Datos opcionales del documento precargados. |
 | `themeMode` | `ThemeMode.system` | `light`, `dark` o `system`. |
 
-Los campos opcionales tienen métodos de asignación en Java y acceso mediante propiedades en Kotlin. La SDK presenta los pasos, colores, logo, diseño y textos asignados al contrato. `BDIVConfig` no admite ajustes de diseño. Para cambiar frases específicas, usa los recursos de texto de Android; consulta la [guía de localización](docs/PERSONALIZACION_TEXTOS.md).
+Los campos opcionales tienen métodos de asignación en Java y acceso mediante propiedades en Kotlin. La SDK aplica automáticamente los pasos, colores, logo, diseño y textos asignados al contrato. `BDIVConfig` no admite ajustes de diseño. La integración habitual no requiere copiar archivos de traducción. Los overrides de la app son opcionales y se limitan a las claves compatibles; consulta la [guía de idioma y textos locales opcionales](docs/PERSONALIZACION_TEXTOS.md).
 
 La animación de carga inicial permanece visible hasta que el flujo y su presentación estén listos. Al inicio usa el color primario del tema de la app o, si no está disponible, su color de énfasis, y un mensaje de carga localizado. El primer paso visible ya muestra la apariencia configurada. Los errores de inicialización se entregan mediante el callback existente.
 
@@ -216,7 +216,7 @@ Los objetos de resultado pueden ser `null`. Los estados incluyen `SUCCES`, `ERRO
 ## Guías de integración
 
 - [Manejo de errores](docs/ERRORES.md)
-- [Localización y personalización de textos](docs/PERSONALIZACION_TEXTOS.md)
+- [Idioma y textos locales opcionales](docs/PERSONALIZACION_TEXTOS.md)
 - [Registros de diagnóstico](docs/LOGGING.md)
 - [Protección contra capturas de pantalla](SCREEN_CAPTURE_CONFIGURATION.md)
 - [Sumas de verificación de los artefactos](CHECKSUMS.sha256)

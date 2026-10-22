@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Referencia opcional, no requerida para integrar la SDK.
+         Los textos habituales siguen el contrato. Copia solo overrides intencionales.
+         Hay claves históricas que no controlan las pantallas Compose actuales.
+         Consulta docs/PERSONALIZACION_TEXTOS.md para conocer el alcance. -->
     <!-- Errores de creación y resultados: consulta docs/ERRORES.md -->
     <string name="identity_error_liveness">We could not confirm your liveness check. Start a new verification and try again in good lighting.</string>
     <string name="identity_error_face">We could not verify your face. Start a new verification with your own document and your face uncovered.</string>
