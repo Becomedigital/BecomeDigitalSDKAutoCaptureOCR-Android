@@ -1,40 +1,40 @@
-# BecomeDigital SDK AutoCapture OCR — Android
+# SDK de BecomeDigital AutoCapture OCR para Android
 
-Native identity verification with automatic document capture, OCR-assisted recognition, a manual capture fallback, and facial verification. This repository distributes `becomedigitalsdk.aar` and integration documentation for client applications.
+Verificación de identidad nativa con captura automática de documentos, reconocimiento mediante OCR, alternativa de captura manual y validación facial. Este repositorio distribuye `becomedigitalsdk.aar` y la documentación de integración para las aplicaciones cliente.
 
-## Features
+## Funcionalidades
 
-- Onboarding and authentication with typed results.
-- Automatic document scanning with framing, image-quality feedback, and front/back guidance.
-- Manual capture after 30 seconds by default when automatic scanning has not completed, with document recognition and retry support.
-- Compose screens, searchable country selection, and contract-assigned branding and text.
-- Host-selected light, dark, or system appearance and optional screen-capture protection.
+- Onboarding y autenticación con respuestas tipadas.
+- Captura automática con guía de encuadre, indicaciones de calidad de imagen e instrucciones para frente y reverso.
+- Captura manual disponible después de 30 segundos de forma predeterminada si la captura automática no termina, con reconocimiento del documento y opción de volver a intentar.
+- Pantallas Compose, selección de país con búsqueda, identidad visual y textos asignados al contrato.
+- Modo claro, oscuro o del sistema elegido por la app, y protección opcional contra capturas de pantalla.
 
-## Requirements and dependencies
+## Requisitos y dependencias
 
-| Component | Version |
+| Componente | Versión |
 | --- | --- |
 | `minSdk` | 24 |
 | `compileSdk` | 36 |
-| Recommended `targetSdk` | 36 |
-| Java source/target compatibility | 11 |
-| Recommended Android Gradle Plugin | 9.0.1 |
-| Recommended Kotlin | 2.2.10 |
+| `targetSdk` recomendado | 36 |
+| Compatibilidad de código fuente y destino de Java | 11 |
+| Android Gradle Plugin recomendado | 9.0.1 |
+| Kotlin recomendado | 2.2.10 |
 | BlinkID Core / UX | 8002.0.0 |
 | Compose BOM | 2026.06.00 |
 | Amplify UI Face Liveness | 1.10.0 |
 | Amplify AWS Cognito | 2.33.0 |
 | CameraX | 1.5.3 |
 
-Use a JDK supported by the selected Android Gradle Plugin. The Java 11 setting above controls compilation compatibility. Enable Compose for the SDK and Face Liveness UI. With Kotlin 2.x, apply the Compose compiler plugin with the same Kotlin version.
+Usa un JDK compatible con la versión de Android Gradle Plugin seleccionada. La configuración Java 11 de la tabla controla la compatibilidad de compilación. Habilita Compose para la interfaz de la SDK y de Face Liveness. Con Kotlin 2.x, aplica el plugin del compilador de Compose con la misma versión de Kotlin.
 
-This repository is a local AAR distribution, not a Maven publication. The Java package remains `com.becomedigital.sdk.identity.becomedigitalsdk`.
+Este repositorio distribuye un AAR local; no es una publicación Maven. El paquete Java sigue siendo `com.becomedigital.sdk.identity.becomedigitalsdk`.
 
-## Installation
+## Instalación
 
-Copy `becomedigitalsdk.aar` into the host application's `app/libs` directory. Configure dependency repositories with `google()` and `mavenCentral()`.
+Copia `becomedigitalsdk.aar` en `app/libs` de la app integradora. Configura los repositorios de dependencias con `google()` y `mavenCentral()`.
 
-Example root build configuration:
+Ejemplo de configuración en el archivo de compilación raíz:
 
 ```groovy
 buildscript {
@@ -52,7 +52,7 @@ buildscript {
 }
 ```
 
-Example application module configuration:
+Ejemplo de configuración en el módulo de la aplicación:
 
 ```groovy
 plugins {
@@ -114,22 +114,22 @@ dependencies {
 }
 ```
 
-A local AAR carries no Gradle dependency metadata. Declare its external dependencies explicitly and align Compose UI, runtime, and Material 3 with the indicated BOM. If the app already uses a listed library, resolve its version consistently. When upgrading from the earlier Capture integration, remove the old `capture-core` and `capture-ux` dependencies.
+Un AAR local no incluye los metadatos de dependencias de Gradle. Declara sus dependencias externas de forma explícita y alinea Compose UI, runtime y Material 3 con la BOM indicada. Si la app ya usa alguna de estas librerías, resuelve su versión de forma consistente. Si vienes de la integración anterior de Capture, elimina las dependencias antiguas `capture-core` y `capture-ux`.
 
-### Application license and permissions
+### Licencia de la aplicación y permisos
 
-Obtain a BlinkID Core license from BecomeDigital for the host application's `applicationId`. Add it as `app/src/main/assets/com.become.blinkid.key`. License contents and application credentials are not included in this repository. A different application identifier, including a development variant, requires a matching license.
+Solicita a BecomeDigital una licencia BlinkID Core para el `applicationId` de tu app. Agrega el archivo `app/src/main/assets/com.become.blinkid.key`. Este repositorio no incluye el contenido de las licencias ni las credenciales de las aplicaciones. Un identificador diferente, incluido el de una variante de desarrollo, requiere su propia licencia.
 
-The AAR declares Internet and camera permissions. The host app must handle the runtime camera permission before a flow that needs it.
+El AAR declara los permisos de Internet y cámara. La app debe gestionar el permiso de cámara en tiempo de ejecución antes de iniciar un flujo que lo requiera.
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-## Start verification
+## Iniciar la verificación
 
-Register a callback before starting and retain the callback manager for the flow. The following members belong to the host activity:
+Registra el callback antes de iniciar y conserva el administrador de callbacks durante el flujo. Los siguientes miembros se definen dentro de la actividad de la app:
 
 ```kotlin
 import com.becomedigital.sdk.identity.becomedigitalsdk.core.callback.BecomeCallBackManager
@@ -148,27 +148,27 @@ private fun startOnboarding() {
             override fun onFinish(response: BDIdentityVerificationResponse) {
                 when (response.responseStatus) {
                     BDIdentityVerificationResponse.StatusType.SUCCES -> {
-                        response.onboarding?.let { /* Creation acknowledged. */ }
-                        response.verification?.let { /* Final result available. */ }
-                        response.authentication?.let { /* Evaluate it.result. */ }
+                        response.onboarding?.let { /* Inicio del proceso confirmado. */ }
+                        response.verification?.let { /* Resultado final disponible. */ }
+                        response.authentication?.let { /* Evalúa it.result. */ }
                     }
                     BDIdentityVerificationResponse.StatusType.ERROR -> {
-                        // Restore the host UI and offer a user-initiated restart.
+                        // Restaura la interfaz de la app y permite que el usuario inicie un nuevo intento.
                     }
                     else -> Unit
                 }
             }
 
             override fun onCancel() {
-                // Restore the host screen without approving verification.
+                // Regresa a la app sin aprobar la verificación.
             }
         }
     )
 
     val config = BDIVConfig(
-        "YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", "YOUR_CONTRACT_ID",
+        "TU_CLIENT_ID", "TU_CLIENT_SECRET", "TU_CONTRACT_ID",
         arrayOf(DocumetType.DNI, DocumetType.PASSPORT),
-        true, "YOUR_USER_ID"
+        true, "TU_USER_ID"
     )
     config.flow = BDIVConfig.Flow.Onboarding
     config.themeMode = BDIVConfig.ThemeMode.system
@@ -176,49 +176,49 @@ private fun startOnboarding() {
 }
 ```
 
-The existing names `clienId`, `DocumetType`, `SUCCES`, and `startAuthentication` are retained for compatibility. `startAuthentication` starts the flow selected in `BDIVConfig`. For authentication, use `BDIVConfig.Flow.Authentication`; `emptyArray()` is supported when document capture is not required.
+Los nombres `clienId`, `DocumetType`, `SUCCES` y `startAuthentication` se conservan por compatibilidad. `startAuthentication` inicia el flujo seleccionado en `BDIVConfig`. Para autenticación usa `BDIVConfig.Flow.Authentication`; puedes usar `emptyArray()` cuando no se requiera capturar documentos.
 
-## Public configuration
+## Configuración pública
 
-| Parameter | Default | Purpose |
+| Parámetro | Valor predeterminado | Uso |
 | --- | --- | --- |
-| `clienId`, `clientSecret`, `contractId`, `userId` | Required | Identify the client, contract, and user. |
-| `documentTypes` | Required for onboarding | `DocumetType[]`: `DNI`, `PASSPORT`, `LICENSE`; authentication may use an empty array. |
-| `allowLibraryLoading` | Constructor argument | Allow the supported gallery-selection option. |
-| `flow` | `Flow.Onboarding` | `Onboarding` or `Authentication`. |
-| `performVerificationCheck` | `true` | Wait for the final onboarding result. |
-| `pollingMaxAttempts` | `0` | Maximum result checks; `0` has no attempt limit. |
-| `pollingTimeoutSeconds` | 2 | Timeout in seconds for each result check. |
-| `debugLogsEnabled` | `false` | Opt in to diagnostic logs during an investigation. |
-| `preventScreenCapture` | `false` | Enable SDK screen-capture protection. |
-| `country`, `state` | `null` | Prefilled two-letter country code and US state, when applicable. |
-| `nationalIdType`, `nationalIdTypeChoices`, `documentNumber` | Empty | Optional prefilled document details. |
-| `themeMode` | `ThemeMode.system` | `light`, `dark`, or `system`. |
+| `clienId`, `clientSecret`, `contractId`, `userId` | Requeridos | Identifican al cliente, el contrato y el usuario. |
+| `documentTypes` | Requerido en onboarding | `DocumetType[]`: `DNI`, `PASSPORT`, `LICENSE`; en autenticación puede usarse un arreglo vacío. |
+| `allowLibraryLoading` | Argumento del constructor | Permite la opción de selección desde la galería disponible en el flujo. |
+| `flow` | `Flow.Onboarding` | `Onboarding` o `Authentication`. |
+| `performVerificationCheck` | `true` | Espera el resultado final de onboarding. |
+| `pollingMaxAttempts` | `0` | Máximo de consultas del resultado; `0` no limita los intentos. |
+| `pollingTimeoutSeconds` | 2 | Tiempo máximo en segundos de cada consulta del resultado. |
+| `debugLogsEnabled` | `false` | Habilita registros de diagnóstico durante una revisión. |
+| `preventScreenCapture` | `false` | Habilita la protección de las pantallas de la SDK contra capturas. |
+| `country`, `state` | `null` | Código de país de dos letras y estado de EE. UU. precargados, cuando corresponda. |
+| `nationalIdType`, `nationalIdTypeChoices`, `documentNumber` | Vacíos | Datos opcionales del documento precargados. |
+| `themeMode` | `ThemeMode.system` | `light`, `dark` o `system`. |
 
-Optional fields have Java setters and Kotlin property accessors. The SDK presents the steps, colors, logo, layout, and text assigned to the contract. Design overrides are not part of `BDIVConfig`. Override individual phrases using Android string resources; see [localization](docs/PERSONALIZACION_TEXTOS.md).
+Los campos opcionales tienen métodos de asignación en Java y acceso mediante propiedades en Kotlin. La SDK presenta los pasos, colores, logo, diseño y textos asignados al contrato. `BDIVConfig` no admite ajustes de diseño. Para cambiar frases específicas, usa los recursos de texto de Android; consulta la [guía de localización](docs/PERSONALIZACION_TEXTOS.md).
 
-The initial animated loader remains visible until the flow and its presentation are ready. It starts with the host theme's primary color, falling back to its accent color, and a localized loading message. The first visible step already uses the configured appearance. Initialization failures use the existing callback.
+La animación de carga inicial permanece visible hasta que el flujo y su presentación estén listos. Al inicio usa el color primario del tema de la app o, si no está disponible, su color de énfasis, y un mensaje de carga localizado. El primer paso visible ya muestra la apariencia configurada. Los errores de inicialización se entregan mediante el callback existente.
 
-The manual capture fallback's default 30-second delay is independent of result-check timeouts. For the general connection/read/write timeout resource, see [the configuration example](examples/network-config/res/values/become_config.xml).
+Los 30 segundos predeterminados para habilitar la alternativa de captura manual son independientes del tiempo máximo de las consultas del resultado. Para configurar el tiempo general de conexión, lectura y escritura, consulta el [recurso de ejemplo](examples/network-config/res/values/become_config.xml).
 
-## Typed responses
+## Respuestas tipadas
 
-`onFinish` supplies `BDIdentityVerificationResponse` with `responseStatus`, `message`, and optional result objects:
+`onFinish` entrega `BDIdentityVerificationResponse`, con `responseStatus`, `message` y objetos de resultado opcionales:
 
-| Object | Public fields | Meaning |
+| Objeto | Campos públicos | Uso |
 | --- | --- | --- |
-| `onboarding` | `code`, `message`, `urlResource`, `userId` | Creation acknowledged when `performVerificationCheck=false`; this is not a final approval. |
-| `verification` | `urlGetData` | Final onboarding result when result checking is enabled. |
-| `authentication` | `company`, `confidence`, `executionId`, `liveness`, `result`, `userId` | Authentication details; evaluate `result` separately. |
+| `onboarding` | `code`, `message`, `urlResource`, `userId` | Confirma el inicio cuando `performVerificationCheck=false`; no representa una aprobación final. |
+| `verification` | `urlGetData` | Resultado final de onboarding cuando está habilitada la consulta del resultado. |
+| `authentication` | `company`, `confidence`, `executionId`, `liveness`, `result`, `userId` | Datos de autenticación; evalúa `result` por separado. |
 
-Result objects can be `null`. Status values include `SUCCES`, `ERROR`, `PENDING`, `NOFOUND`, and `CANCEL`. Normal cancellation uses `onCancel()`. A document-only flow does not require a facial result. Use the concrete result objects instead of dictionary-based response access; see [error handling](docs/ERRORES.md).
+Los objetos de resultado pueden ser `null`. Los estados incluyen `SUCCES`, `ERROR`, `PENDING`, `NOFOUND` y `CANCEL`. La cancelación habitual usa `onCancel()`. Un flujo que solo solicita documentos no requiere un resultado facial. Usa los objetos concretos de resultado en lugar de acceder a un diccionario de respuesta; consulta el [manejo de errores](docs/ERRORES.md).
 
-## Integration guides
+## Guías de integración
 
-- [Error handling](docs/ERRORES.md)
-- [Localization and text overrides](docs/PERSONALIZACION_TEXTOS.md)
-- [Diagnostic logging](docs/LOGGING.md)
-- [Screen-capture protection](SCREEN_CAPTURE_CONFIGURATION.md)
-- [Artifact checksums](CHECKSUMS.sha256)
+- [Manejo de errores](docs/ERRORES.md)
+- [Localización y personalización de textos](docs/PERSONALIZACION_TEXTOS.md)
+- [Registros de diagnóstico](docs/LOGGING.md)
+- [Protección contra capturas de pantalla](SCREEN_CAPTURE_CONFIGURATION.md)
+- [Sumas de verificación de los artefactos](CHECKSUMS.sha256)
 
-Before releasing the host app, test automatic/manual document capture, retry, permissions, facial verification, callbacks, and cancellation on a physical device using its licensed application identifier. Check the final application's native libraries and Android 15+ compatibility using the Android tooling required by your distribution channel.
+Antes de publicar la app, prueba en un dispositivo físico la captura automática y manual, los reintentos, los permisos, la validación facial, los callbacks y la cancelación. Usa el identificador de aplicación que corresponda a la licencia. Revisa las librerías nativas de la app final y su compatibilidad con Android 15 o posterior mediante las herramientas exigidas por tu canal de distribución.

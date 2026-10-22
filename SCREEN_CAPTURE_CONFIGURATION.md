@@ -1,15 +1,15 @@
-# Screen-capture protection — Android
+# Protección contra capturas de pantalla — Android
 
-This guide applies to the AAR in this repository. Constructors that omit `preventScreenCapture` default to `false` in Debug and Release. Earlier distributions defaulted to `true`.
+Esta guía corresponde al AAR incluido en este repositorio. Los constructores que omiten `preventScreenCapture` usan `false` en Debug y Release. En distribuciones anteriores, el valor predeterminado era `true`.
 
-| Value | SDK behavior |
+| Valor | Comportamiento de la SDK |
 | --- | --- |
-| `false` (default) | The SDK removes `WindowManager.LayoutParams.FLAG_SECURE` from its activity. |
-| `true` | The SDK applies `FLAG_SECURE` to protect its activity from screenshots and recording. |
+| `false` (predeterminado) | La SDK quita `WindowManager.LayoutParams.FLAG_SECURE` de su actividad. |
+| `true` | La SDK aplica `FLAG_SECURE` para proteger su actividad contra capturas y grabaciones. |
 
-The option controls the SDK activity. It does not modify other host activities or override protections applied independently by Android or other components.
+La opción controla la actividad de la SDK. No modifica otras actividades de la app ni las protecciones que Android u otros componentes apliquen por separado.
 
-## Enable explicitly
+## Habilitar la protección
 
 ```java
 BDIVConfig config = new BDIVConfig(
@@ -21,10 +21,10 @@ config.setPreventScreenCapture(true);
 BecomeResponseManager.getInstance().startAuthentication(this, config);
 ```
 
-Kotlin can also call `config.setPreventScreenCapture(true)`. The full constructor accepts `preventScreenCapture` after `debugLogsEnabled`. Omit the setting or pass `false` to allow capture. Both onboarding and authentication support the option.
+En Kotlin también puedes llamar a `config.setPreventScreenCapture(true)`. El constructor completo acepta `preventScreenCapture` después de `debugLogsEnabled`. Omite la opción o usa `false` para permitir capturas. La opción está disponible en onboarding y autenticación.
 
-## Upgrade
+## Actualización
 
-Review calls that previously omitted this parameter. Call `setPreventScreenCapture(true)` where protection must remain enabled. Explicit values retain their requested behavior. Rebuild the host app with the AAR and dependencies in the [README](README.md).
+Revisa las llamadas que antes omitían el parámetro. Llama a `setPreventScreenCapture(true)` donde deba mantenerse la protección. Los valores explícitos conservan el comportamiento solicitado. Recompila la app con el AAR y las dependencias indicadas en el [README](README.md).
 
-On a physical device, verify screenshots and recording during document capture, facial verification, cancellation, and return to the host. Test both settings if the host supports both modes.
+En un dispositivo físico, verifica las capturas y la grabación durante la captura documental, la validación facial, la cancelación y el regreso a la app. Prueba ambos valores si la app admite los dos modos.
