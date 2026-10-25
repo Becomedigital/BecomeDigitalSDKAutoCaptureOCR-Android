@@ -1,43 +1,52 @@
-# Localización y personalización de textos — Android
+# Idioma y textos locales opcionales — Android
 
-## Configuración
+## Integración habitual
 
-1. Copia las claves necesarias del ejemplo en [español](../examples/custom-texts/res/values/strings.xml) o [inglés](../examples/custom-texts/res/values-b+en/strings.xml).
-2. Usa `res/values/become_strings.xml` de la app y variantes por idioma como `values-en/become_strings.xml`.
-3. Conserva cada `name`, edita los valores y recompila la app.
-4. Mantén un solo elemento `<resources>` por archivo XML y evita claves duplicadas para un mismo idioma.
+Los textos de las pantallas Compose de Become se aplican automáticamente según el contrato. **No necesitas copiar los ejemplos de `strings.xml` para integrar la SDK o recibir cambios de textos del contrato.**
 
-Las claves nativas definidas por la app tienen prioridad para esas frases específicas. Las claves que falten conservan el texto asignado al contrato o el valor predeterminado de la SDK. Personaliza cada idioma admitido. Cambiar los recursos de texto no requiere recompilar el binario de la SDK.
+Esta guía se conserva para overrides puntuales y textos que todavía usan recursos nativos. Los ejemplos en [español](../examples/custom-texts/res/values/strings.xml) e [inglés](../examples/custom-texts/res/values-b+en/strings.xml) son referencias de compatibilidad. Incluyen claves históricas que no representan todas las frases de las pantallas actuales.
 
-## Claves por pantalla
+## Alcance de los overrides
 
-Una clave compartida cambia todas las pantallas que la usan. Copia los nombres completos de la plantilla; `*` indica un prefijo, no una clave literal.
-
-| Pantalla o uso | Claves |
+| Texto | Comportamiento actual |
 | --- | --- |
-| Introducción | `text_tittle_general_intro`, `text_sub_tittle_general_intro`, `text_start_btn`, `and_intro_general`, `text_video_intro_general`, `text_document_intr_general` |
-| Introducción y análisis facial | `text_video_intro`, `text_tittle_selfie`, `btn_text_recording_video`, `text_loader_selfie`, `text_progress_inteligence` |
-| Selección de país y documento | `text_tittle_selec_document`, `text_dni_selec_document`, `text_license`, `text_passport`, `select_text`, `text_body_country`, `text_msn_selec_document` |
-| Captura y galería | `text_tittle_intro_doc_front`, `text_tittle_intro_doc`, `text_btn_introduction_doc`, `text_btn_intro_doc_galery`, `text_error_path_image_pick` |
-| Vista previa | `text_info_preview`, `text_confirm_preview`, `text_retry_previe` |
-| Carga y envío | `text_loader_init`, `text_loader`, `text_varification_title`, `text_varification_body`, `text_finish_upload`, `text_info_upload`, `text_document_validation` |
-| Consulta del resultado | `text_progress_result`, `text_progress_delay_result`, `text_progress_delay_finish_result` |
-| Error documental y reintento | `text_title_document_error`, `text_sub_title_document_error`, `text_error_capture_document`, `text_title_button_retry` |
-| Creación y resultados: cierre facial, nueva captura y reintento | Claves `identity_error_*` de los ejemplos. |
-| Error general o validación fallida | `text_varification_title_error`, `text_varification_body_error`, `text_varification_title_compliance_error`, `text_varification_body_compliance_error`, `text_error_compliance_not_allowed`, `unknown_error`, `general_error`, `text_empty_balance` |
-| Error de conexión | `timeout_error`, `no_internet_error`, `connection_lost_error` |
-| Resultado final | `text_finish`, `text_sub_tittle_finish` |
-| Confirmación de salida | `text_undo`, `text_sub_tittle_undo`, `text_tittle_undo`, `terminate_text`, `text_cancel` |
-| Face Liveness: preparación y fotosensibilidad | `amplify_ui_liveness_get_ready_a11y_photosensitivity_icon_content_description`, `amplify_ui_liveness_get_ready_begin_check`, `amplify_ui_liveness_get_ready_center_face_label`, `amplify_ui_liveness_get_ready_photosensitivity_description`, `amplify_ui_liveness_get_ready_photosensitivity_dialog_description`, `amplify_ui_liveness_get_ready_photosensitivity_dialog_dismiss`, `amplify_ui_liveness_get_ready_photosensitivity_dialog_title`, `amplify_ui_liveness_get_ready_photosensitivity_title` |
-| Face Liveness: instrucciones y captura | `amplify_ui_liveness_challenge_a11y_cancel_content_description`, `amplify_ui_liveness_challenge_connecting`, `amplify_ui_liveness_challenge_instruction_hold_face_during_freshness`, `amplify_ui_liveness_challenge_instruction_move_face`, `amplify_ui_liveness_challenge_instruction_move_face_closer`, `amplify_ui_liveness_challenge_instruction_move_face_further`, `amplify_ui_liveness_challenge_instruction_multiple_faces_detected`, `amplify_ui_liveness_challenge_recording_indicator_label`, `amplify_ui_liveness_challenge_verifying` |
+| Pantallas Compose de Become | Usan el texto del contrato para el locale actual, su idioma base, español y finalmente el valor predeterminado de la SDK. |
+| Introducción | Consulta primero las claves nativas compatibles `intro_*`, como `intro_title`, `intro_body` e `intro_cta`. |
+| Tratamiento de datos personales | Consulta primero las claves compatibles `atdp_*`, como `atdp_title`, `atdp_markdown`, `atdp_checkbox_label` y `atdp_accept`. |
+| Carga y errores que leen recursos Android | Admiten overrides del recurso que consume esa etiqueta, como `text_loader_init`, `identity_error_documentfront` o `timeout_error`. |
+| Instrucciones internas de captura y detector facial | Usan los recursos compatibles del componente nativo. |
 
-## Instrucciones de captura
+En introducción, los puntos de la clave se convierten en guiones bajos: `header.reminder` corresponde a `intro_header_reminder`. En ATDP, las claves camel case se convierten a snake case: `checkboxLabel` corresponde a `atdp_checkbox_label`.
 
-BlinkID UX incluye sus propias instrucciones de captura localizadas. Las claves `mbic_*` que se conservan en los ejemplos corresponden a la interfaz anterior de Capture y no personalizan BlinkID UX. Para su interfaz de captura, usa los recursos de la versión fijada de BlinkID UX. Las pantallas de introducción, vista previa y error de Become usan las claves indicadas arriba.
+El resto de las etiquetas Compose no tiene un mapeo general desde todos los namespaces del contrato a `strings.xml`. Las claves antiguas de introducción o documento, como `text_tittle_general_intro` o `text_dni_selec_document`, no sustituyen por sí solas esas etiquetas actuales. `BDIVConfig` no expone un selector de idioma ni una tabla de traducciones; el locale del contrato se deriva del entorno Android.
 
-## Formato y verificación
+## Ejemplo opcional
 
-- Conserva el significado de las instrucciones de cámara, accesibilidad y fotosensibilidad.
-- Mantén los marcadores de formato y los saltos de línea intencionales. En el XML de Android, escapa `&` como `&amp;`, conserva los apóstrofos escapados y mantén el `app_name` de la app.
-- No cambies nombres de claves para corregir su escritura ni dupliques entradas de un mismo idioma.
-- Después de recompilar la app, verifica en un dispositivo físico la introducción, captura, reintentos, errores, carga y resultados en cada idioma admitido.
+Agrega **solo las entradas que quieras fijar desde la app** a `app/src/main/res/values/become_strings.xml`:
+
+```xml
+<resources>
+    <string name="intro_cta">Empezar verificación</string>
+    <string name="atdp_accept">Acepto y continúo</string>
+    <string name="text_loader_init">Cargando…</string>
+    <string name="identity_error_documentfront">Vuelve a capturar el frente completo y enfocado.</string>
+</resources>
+```
+
+Un override tiene prioridad en la ruta que consulta ese recurso y puede ocultar cambios posteriores del contrato. Si copiaste la plantilla completa, retira las entradas que no quieras mantener como overrides. Usa los textos del contrato para personalizar de forma habitual el recorrido.
+
+## Componentes nativos
+
+BlinkID UX incluye sus propias instrucciones localizadas y admite las claves compatibles de su versión. Las entradas `mbic_*` de las plantillas corresponden a Capture legacy y no personalizan BlinkID UX.
+
+Amplify Face Liveness usa las claves nativas compatibles `amplify_ui_liveness_*`. La introducción facial de Become y las instrucciones internas del detector se personalizan de forma independiente; el texto del contrato no se mapea automáticamente a todas las frases internas del componente.
+
+## Instalación y verificación de overrides
+
+1. Agrega únicamente las claves elegidas, conserva sus nombres exactos y un solo elemento `<resources>` por archivo.
+2. Usa variantes como `values-en` para los idiomas que personalices. `values-b+en` también es válido; evita duplicar la misma clave en dos ubicaciones equivalentes del mismo idioma.
+3. Conserva marcadores de formato y saltos de línea. Escapa `&` como `&amp;` y los apóstrofos según las reglas de Android.
+4. Recompila la app; no necesitas regenerar el AAR.
+5. Valida en dispositivo físico los recursos modificados y confirma que las frases sin override siguen el contrato o sus valores predeterminados.
+
+Los nombres de recursos no son intercambiables entre plataformas: Android usa `identity_error_documentfront`; iOS usa `identity_error_documentFront`.
