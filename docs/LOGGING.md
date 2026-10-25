@@ -1,18 +1,18 @@
-# Diagnostic logging — Android
+# Registros de diagnóstico — Android
 
-Enable the setting before starting the SDK for an investigation:
+Habilita la opción antes de iniciar la SDK para revisar un problema:
 
 ```kotlin
 config.setDebugLogsEnabled(true)
 BecomeResponseManager.getInstance().startAuthentication(activity, config)
 ```
 
-Java uses the same `setDebugLogsEnabled(true)` method. The default is `false`; disable logging when the investigation ends.
+El valor predeterminado es `false`; deshabilita los registros al terminar la revisión. En Java usa también `setDebugLogsEnabled(true)`. En Logcat, filtra con `tag:BecomeSDK level:DEBUG`.
 
-In Logcat, filter with `tag:BecomeSDK level:DEBUG`. From a terminal:
+Desde una terminal:
 
 ```sh
 adb logcat -v threadtime 'BecomeSDK:D' '*:S'
 ```
 
-For support, include the SDK version, device, visible step, and relevant `BecomeSDK` lines. Review logs before sharing and exclude credentials, license contents, images, and personal data.
+Para solicitar soporte, incluye la versión de la SDK, el dispositivo, el paso visible y las líneas relevantes de `BecomeSDK`. Revisa los registros antes de compartirlos y excluye credenciales, contenido de licencias, imágenes y datos personales.

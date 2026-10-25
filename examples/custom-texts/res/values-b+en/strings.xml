@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Creation and result errors: see docs/ERRORES.md -->
+    <!-- Errores de creación y resultados: consulta docs/ERRORES.md -->
     <string name="identity_error_liveness">We could not confirm your liveness check. Start a new verification and try again in good lighting.</string>
     <string name="identity_error_face">We could not verify your face. Start a new verification with your own document and your face uncovered.</string>
     <string name="identity_error_documentfront">We could not read the front of your document. Capture it again in full, in focus and without glare.</string>
@@ -25,9 +25,9 @@
     <string name="identity_error_timeout">The response is taking longer than expected. Check your connection and try again.</string>
     <string name="identity_error_offline">There is no internet connection. Connect to a network and try again.</string>
     <string name="identity_error_connection">The connection to the service was interrupted. Check your network and try again.</string>
-    <!-- Copy only needed text overrides into the host app. Preserve each key and its formatting placeholders. -->
+    <!-- Copia solo las claves necesarias a la app integradora. Conserva los nombres y marcadores de formato. -->
 
-    <!-- Introduction and liveness -->
+    <!-- Introducción y prueba de vida -->
     <string name="text_tittle_general_intro">Let`s verify your identity</string>
     <string name="text_sub_tittle_general_intro">To be verified, you will have to:</string>
     <string name="text_start_btn">Continue</string>
@@ -40,7 +40,7 @@
     <string name="text_loader_selfie">Our artificial intelligence is performing a biometric analysis of your face</string>
     <string name="text_progress_inteligence">Our artificial intelligence is performing the biometric analysis of your face</string>
 
-    <!-- Country and document selection -->
+    <!-- Selección de país y documento -->
     <string name="text_tittle_selec_document">We need you to provide some of the following documents:</string>
     <string name="text_dni_selec_document">National Identification</string>
     <string name="text_license">Driving License</string>
@@ -49,7 +49,7 @@
     <string name="text_body_country">Select the type of document</string>
     <string name="text_msn_selec_document">Please confirm that you have actual documents or their images available on your device</string>
 
-    <!-- Capture and preview -->
+    <!-- Captura y vista previa -->
     <string name="text_tittle_intro_doc_front">FRONT SIDE</string>
     <string name="text_tittle_intro_doc">REAR SIDE</string>
     <string name="text_btn_introduction_doc">Capture document</string>
@@ -58,7 +58,7 @@
     <string name="text_confirm_preview">Yes, the image is clear</string>
     <string name="text_retry_previe">No, retry</string>
 
-    <!-- Loading, results, and completion -->
+    <!-- Carga, resultados y finalización -->
     <string name="text_loader_init">Starting...</string>
     <string name="text_loader">Loading…</string>
     <string name="text_varification_title">Finished initial capture</string>
@@ -72,14 +72,14 @@
     <string name="text_finish">Process complete</string>
     <string name="text_sub_tittle_finish">Congratulations, the capture of your data is complete</string>
 
-    <!-- Exit confirmation -->
+    <!-- Confirmación de salida -->
     <string name="text_undo">Back</string>
     <string name="text_sub_tittle_undo">Do you want to finish the process?</string>
     <string name="text_tittle_undo">You`re sure?</string>
     <string name="terminate_text">Finish</string>
     <string name="text_cancel">Finish</string>
 
-    <!-- Errors and retry; a configured message may take precedence -->
+    <!-- Errores y reintentos; un mensaje configurado puede tener prioridad -->
     <string name="text_title_button_retry">Try again</string>
     <string name="text_title_document_error">Review your document photos</string>
     <string name="text_sub_title_document_error">Make sure the entire document is visible, sharp and free of glare.</string>
@@ -97,7 +97,7 @@
     <string name="text_empty_balance">Insufficient balance</string>
     <string name="text_error_path_image_pick">You can`t get the file route</string>
 
-    <!-- Legacy Capture compatibility; does not customize BlinkID UX -->
+    <!-- Compatibilidad con Capture anterior; no personaliza BlinkID UX -->
     <string name="mbic_check_internet_connection">Check internet connection</string>
     <string name="mbic_flip_document">Flip the document</string>
     <string name="mbic_lightning_too_bright">Move to a place with less lighting</string>
@@ -115,7 +115,7 @@
     <string name="mbic_tutorial_fields_visible_title">Keep all fields visible</string>
     <string name="mbic_tutorial_harsh_light_title">Beware of intense light</string>
 
-    <!-- Face Liveness: preserve instruction and photosensitivity meanings -->
+    <!-- Face Liveness: conserva el significado de las instrucciones y los avisos de fotosensibilidad -->
     <string name="amplify_ui_liveness_challenge_a11y_cancel_content_description">Cancel Challenge</string>
     <string name="amplify_ui_liveness_challenge_connecting">Connecting</string>
     <string name="amplify_ui_liveness_challenge_instruction_hold_face_during_freshness">Hold still</string>
