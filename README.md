@@ -74,6 +74,14 @@ android {
     }
     kotlinOptions { jvmTarget = "11" }
     buildFeatures { compose true }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                'proguard-rules.pro'
+        }
+    }
 }
 
 dependencies {
@@ -200,6 +208,10 @@ Los campos opcionales tienen métodos de asignación en Java y acceso mediante p
 La animación de carga inicial permanece visible hasta que el flujo y su presentación estén listos. Al inicio usa el color primario del tema de la app o, si no está disponible, su color de énfasis, y un mensaje de carga localizado. El primer paso visible ya muestra la apariencia configurada. Los errores de inicialización se entregan mediante el callback existente.
 
 Los 30 segundos predeterminados para habilitar la alternativa de captura manual son independientes del tiempo máximo de las consultas del resultado. Para configurar el tiempo general de conexión, lectura y escritura, consulta el [recurso de ejemplo](examples/network-config/res/values/become_config.xml).
+
+## Optimización con R8
+
+El AAR incluye reglas de consumo para R8. Habilita la reducción de código y recursos en el release de tu app según el ejemplo anterior. Consulta la [guía de R8](docs/R8.md) para configurar la app y validar el release optimizado.
 
 ## Respuestas tipadas
 
