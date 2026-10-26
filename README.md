@@ -195,7 +195,7 @@ Los nombres `clienId`, `DocumetType`, `SUCCES` y `startAuthentication` se conser
 | `nationalIdType`, `nationalIdTypeChoices`, `documentNumber` | Vacíos | Datos opcionales del documento precargados. |
 | `themeMode` | `ThemeMode.system` | `light`, `dark` o `system`. |
 
-Los campos opcionales tienen métodos de asignación en Java y acceso mediante propiedades en Kotlin. La SDK aplica automáticamente los pasos, colores, logo, diseño y textos asignados al contrato. `BDIVConfig` no admite ajustes de diseño. La integración habitual no requiere copiar archivos de traducción. Los overrides de la app son opcionales y se limitan a las claves compatibles; consulta la [guía de idioma y textos locales opcionales](docs/PERSONALIZACION_TEXTOS.md).
+La SDK aplica los pasos, apariencia y textos asignados al contrato. `BDIVConfig` no configura el diseño ni los textos del recorrido. Los archivos locales son opcionales para instrucciones de los componentes nativos y etiquetas técnicas de carga o red; consulta la [guía de textos nativos](docs/PERSONALIZACION_TEXTOS.md).
 
 La animación de carga inicial permanece visible hasta que el flujo y su presentación estén listos. Al inicio usa el color primario del tema de la app o, si no está disponible, su color de énfasis, y un mensaje de carga localizado. El primer paso visible ya muestra la apariencia configurada. Los errores de inicialización se entregan mediante el callback existente.
 
