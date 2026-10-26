@@ -1,52 +1,41 @@
-# Idioma y textos locales opcionales — Android
+# Textos de componentes nativos — Android
 
-## Integración habitual
+## Textos del recorrido
 
-Los textos de las pantallas Compose de Become se aplican automáticamente según el contrato. **No necesitas copiar los ejemplos de `strings.xml` para integrar la SDK o recibir cambios de textos del contrato.**
+Los títulos, instrucciones, consentimiento, selección de país y documento, introducciones, revisión y resultados de Become se administran desde la configuración del contrato. No copies archivos de traducción para configurar ese recorrido. Las claves faltantes conservan los valores predeterminados.
 
-Esta guía se conserva para overrides puntuales y textos que todavía usan recursos nativos. Los ejemplos en [español](../examples/custom-texts/res/values/strings.xml) e [inglés](../examples/custom-texts/res/values-b+en/strings.xml) son referencias de compatibilidad. Incluyen claves históricas que no representan todas las frases de las pantallas actuales.
+Esta guía y sus ejemplos incluyen únicamente claves de componentes nativos y etiquetas técnicas locales. Retira de los archivos de la app las antiguas claves del flujo si esas frases deben seguir las actualizaciones del contrato. Un override local compatible puede fijar una frase y ocultar su actualización; no copies la plantilla completa.
 
-## Alcance de los overrides
+## Etiquetas técnicas de la SDK
 
-| Texto | Comportamiento actual |
-| --- | --- |
-| Pantallas Compose de Become | Usan el texto del contrato para el locale actual, su idioma base, español y finalmente el valor predeterminado de la SDK. |
-| Introducción | Consulta primero las claves nativas compatibles `intro_*`, como `intro_title`, `intro_body` e `intro_cta`. |
-| Tratamiento de datos personales | Consulta primero las claves compatibles `atdp_*`, como `atdp_title`, `atdp_markdown`, `atdp_checkbox_label` y `atdp_accept`. |
-| Carga y errores que leen recursos Android | Admiten overrides del recurso que consume esa etiqueta, como `text_loader_init`, `identity_error_documentfront` o `timeout_error`. |
-| Instrucciones internas de captura y detector facial | Usan los recursos compatibles del componente nativo. |
+Estas etiquetas todavía consultan recursos locales y no se cambian mediante los textos del contrato. Los ejemplos conservan únicamente las claves verificadas: carga inicial `text_loader_init`; errores de red `timeout_error`, `no_internet_error` y `connection_lost_error`; progreso `text_info_upload`, `text_progress_result`, `text_progress_delay_result` y `text_progress_delay_finish_result` (la SDK agrega el porcentaje al mensaje de envío).
 
-En introducción, los puntos de la clave se convierten en guiones bajos: `header.reminder` corresponde a `intro_header_reminder`. En ATDP, las claves camel case se convierten a snake case: `checkboxLabel` corresponde a `atdp_checkbox_label`.
+No son un catálogo de títulos o acciones del recorrido.
 
-El resto de las etiquetas Compose no tiene un mapeo general desde todos los namespaces del contrato a `strings.xml`. Las claves antiguas de introducción o documento, como `text_tittle_general_intro` o `text_dni_selec_document`, no sustituyen por sí solas esas etiquetas actuales. `BDIVConfig` no expone un selector de idioma ni una tabla de traducciones; el locale del contrato se deriva del entorno Android.
+## Componentes admitidos
 
-## Ejemplo opcional
+| Componente | Versión verificada | Claves locales |
+| --- | --- | --- |
+| BlinkID UX | 8002.0.0 | `mb_blinkid_*` |
+| Amplify Face Liveness | 1.10.0 | `amplify_ui_liveness_*` |
 
-Agrega **solo las entradas que quieras fijar desde la app** a `app/src/main/res/values/become_strings.xml`:
+Las claves `mbic_*` pertenecen a Capture Legacy y no personalizan BlinkID UX. Los nombres difieren entre iOS y Android; conserva los de esta distribución.
+
+## Personalización opcional
+
+Agrega solo las entradas que necesitas a `app/src/main/res/values/become_strings.xml`:
 
 ```xml
 <resources>
-    <string name="intro_cta">Empezar verificación</string>
-    <string name="atdp_accept">Acepto y continúo</string>
-    <string name="text_loader_init">Cargando…</string>
-    <string name="identity_error_documentfront">Vuelve a capturar el frente completo y enfocado.</string>
+    <string name="mb_blinkid_camera_flip_document">Voltea el documento</string>
+    <string name="amplify_ui_liveness_challenge_connecting">Conectando…</string>
 </resources>
 ```
 
-Un override tiene prioridad en la ruta que consulta ese recurso y puede ocultar cambios posteriores del contrato. Si copiaste la plantilla completa, retira las entradas que no quieras mantener como overrides. Usa los textos del contrato para personalizar de forma habitual el recorrido.
+Android combina los recursos de la app con los de los componentes: un recurso definido por la app sustituye el mismo nombre. Algunas instrucciones equivalentes de Amplify pueden recibir texto asignado al contrato; el recurso nativo se usa cuando esa instrucción no tiene un texto configurado. Los textos que controla el contrato se actualizan desde esa configuración, no copiando claves del flujo a `strings.xml`.
 
-## Componentes nativos
+Usa variantes como `values-es` y `values-en`; evita duplicados con `values-b+en`. Consulta los ejemplos opcionales en [español](../examples/custom-texts/res/values/strings.xml) e [inglés](../examples/custom-texts/res/values-b+en/strings.xml).
 
-BlinkID UX incluye sus propias instrucciones localizadas y admite las claves compatibles de su versión. Las entradas `mbic_*` de las plantillas corresponden a Capture legacy y no personalizan BlinkID UX.
+## Verificación
 
-Amplify Face Liveness usa las claves nativas compatibles `amplify_ui_liveness_*`. La introducción facial de Become y las instrucciones internas del detector se personalizan de forma independiente; el texto del contrato no se mapea automáticamente a todas las frases internas del componente.
-
-## Instalación y verificación de overrides
-
-1. Agrega únicamente las claves elegidas, conserva sus nombres exactos y un solo elemento `<resources>` por archivo.
-2. Usa variantes como `values-en` para los idiomas que personalices. `values-b+en` también es válido; evita duplicar la misma clave en dos ubicaciones equivalentes del mismo idioma.
-3. Conserva marcadores de formato y saltos de línea. Escapa `&` como `&amp;` y los apóstrofos según las reglas de Android.
-4. Recompila la app; no necesitas regenerar el AAR.
-5. Valida en dispositivo físico los recursos modificados y confirma que las frases sin override siguen el contrato o sus valores predeterminados.
-
-Los nombres de recursos no son intercambiables entre plataformas: Android usa `identity_error_documentfront`; iOS usa `identity_error_documentFront`.
+Conserva los nombres, mayúsculas, marcadores de formato y el significado de las instrucciones de seguridad y fotosensibilidad. Modifica únicamente los valores necesarios. Recompila la app después de cambiar recursos; no necesitas recompilar la SDK. Verifica los idiomas personalizados en un dispositivo físico. `BDIVConfig` no selecciona una tabla de traducciones ni configura los textos del recorrido.
