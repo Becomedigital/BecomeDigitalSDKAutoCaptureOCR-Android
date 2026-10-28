@@ -129,6 +129,7 @@ La respuesta dispone de `toJson()` si necesitas representarla como texto. Los er
 
 ## Guías de integración
 
+- [Demo de integración para Android con Jetpack Compose](Demo/AndroidBlinkIDIntegration/README.md)
 - [Instalación, dependencias, licencia y permisos](INSTALACION.md)
 - [Localización y claves admitidas](docs/PERSONALIZACION_TEXTOS.md)
 - [Resultados y errores](docs/ERRORES.md)

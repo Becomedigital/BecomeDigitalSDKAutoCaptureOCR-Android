@@ -1,0 +1,11 @@
+/credentials.properties
+/local.properties
+/.gradle/
+/.idea/
+/build/
+/app/build/
+/app/libs/
+/app/src/main/assets/com.become.blinkid.key
+*.iml
+*.apk
+*.aab
