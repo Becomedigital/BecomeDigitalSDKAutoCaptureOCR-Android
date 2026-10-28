@@ -1,1 +1,1 @@
-# The distributed Become AAR supplies its own consumer rules.
+# El AAR distribuido de Become incluye sus propias reglas de consumo.

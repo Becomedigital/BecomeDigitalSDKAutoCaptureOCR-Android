@@ -217,7 +217,7 @@ Los objetos de resultado pueden ser `null`. Los estados incluyen `SUCCES`, `ERRO
 
 ## Guías de integración
 
-- [Android integration demo with Jetpack Compose](Demo/AndroidBlinkIDIntegration/README.md)
+- [Demo de integración para Android con Jetpack Compose](Demo/AndroidBlinkIDIntegration/README.md)
 - [Manejo de errores](docs/ERRORES.md)
 - [Idioma y textos locales opcionales](docs/PERSONALIZACION_TEXTOS.md)
 - [Registros de diagnóstico](docs/LOGGING.md)
