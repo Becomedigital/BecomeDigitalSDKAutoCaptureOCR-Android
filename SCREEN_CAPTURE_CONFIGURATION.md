@@ -1,30 +1,25 @@
-# Protección contra capturas de pantalla — Android
+# Protección contra capturas de pantalla en Android
 
-Esta guía corresponde al AAR incluido en este repositorio. Los constructores que omiten `preventScreenCapture` usan `false` en Debug y Release. En distribuciones anteriores, el valor predeterminado era `true`.
+Configura `preventScreenCapture` antes de iniciar la verificación, según los requisitos de privacidad de tu app.
 
-| Valor | Comportamiento de la SDK |
+| Valor | Comportamiento |
 | --- | --- |
-| `false` (predeterminado) | La SDK quita `WindowManager.LayoutParams.FLAG_SECURE` de su actividad. |
-| `true` | La SDK aplica `FLAG_SECURE` para proteger su actividad contra capturas y grabaciones. |
+| `false`, predeterminado | La SDK permite capturas y grabaciones de sus pantallas. |
+| `true` | La SDK activa la protección de sus pantallas contra capturas y grabaciones. |
 
-La opción controla la actividad de la SDK. No modifica otras actividades de la app ni las protecciones que Android u otros componentes apliquen por separado.
+La opción está disponible en onboarding y autenticación. Se aplica a las pantallas de BecomeDigital; no cambia la protección de otras pantallas de tu app ni las restricciones independientes del sistema u otros componentes.
 
 ## Habilitar la protección
 
-```java
-BDIVConfig config = new BDIVConfig(
-    clientId, clientSecret, contractId, documentTypes,
-    true, // allowLibraryLoading
-    userId
-);
-config.setPreventScreenCapture(true);
-BecomeResponseManager.getInstance().startAuthentication(this, config);
+```kotlin
+config.setPreventScreenCapture(true)
+BecomeResponseManager.getInstance().startAuthentication(activity, config)
 ```
 
-En Kotlin también puedes llamar a `config.setPreventScreenCapture(true)`. El constructor completo acepta `preventScreenCapture` después de `debugLogsEnabled`. Omite la opción o usa `false` para permitir capturas. La opción está disponible en onboarding y autenticación.
+En Java, utiliza también `config.setPreventScreenCapture(true)` antes de iniciar el flujo.
 
-## Actualización
+## Actualizar una integración anterior
 
-Revisa las llamadas que antes omitían el parámetro. Llama a `setPreventScreenCapture(true)` donde deba mantenerse la protección. Los valores explícitos conservan el comportamiento solicitado. Recompila la app con el AAR y las dependencias indicadas en el [README](README.md).
+En entregas anteriores, la protección estaba habilitada de forma predeterminada. Si tu app necesita conservarla, establece `true` explícitamente. Los valores `true` o `false` ya indicados conservan el comportamiento solicitado.
 
-En un dispositivo físico, verifica las capturas y la grabación durante la captura documental, la validación facial, la cancelación y el regreso a la app. Prueba ambos valores si la app admite los dos modos.
+Después de actualizar la app, comprueba las capturas y la grabación en un dispositivo físico durante la captura del documento, la validación facial, la cancelación y el regreso a la app.

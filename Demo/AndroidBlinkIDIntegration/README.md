@@ -20,4 +20,4 @@ Solicita a BecomeDigital las credenciales, el identificador del contrato y la li
 - `app/src/main/res/values-es` muestra la localización al español de la aplicación anfitriona y los textos admitidos por la SDK.
 - `app/build.gradle` declara el AAR de la SDK y sus dependencias necesarias. `AndroidManifest.xml` declara la actividad y el permiso de cámara.
 
-Consulta la [guía de integración](../../README.md), la [guía de localización](../../docs/PERSONALIZACION_TEXTOS.md), la [guía de diagnóstico](../../docs/LOGGING.md) y la [guía de errores](../../docs/ERRORES.md) para adaptar esta integración a tu aplicación.
+Consulta la [guía de instalación](../../INSTALACION.md), la [guía de localización](../../docs/PERSONALIZACION_TEXTOS.md), la [guía de diagnóstico](../../docs/LOGGING.md) y la [guía de errores](../../docs/ERRORES.md) para adaptar esta integración a tu aplicación.
