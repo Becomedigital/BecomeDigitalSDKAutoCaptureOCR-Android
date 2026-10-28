@@ -143,3 +143,5 @@ La SDK incluye estas declaraciones. Solicita el permiso de cámara en tiempo de 
 ## Continuar con la integración
 
 Consulta el [ejemplo de inicialización](README.md#iniciar-una-verificación), las [claves de localización](docs/PERSONALIZACION_TEXTOS.md) y la [configuración de R8](docs/R8.md). Prueba la app final en un dispositivo físico, incluida su versión de publicación.
+
+The [Android integration demo](Demo/AndroidBlinkIDIntegration/README.md) shows these steps in an app with a Jetpack Compose screen, an `AppCompatActivity` host, and SDK callback handling.

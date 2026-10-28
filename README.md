@@ -7,6 +7,7 @@ Integra la verificación de identidad en tu aplicación: onboarding, autenticaci
 - Usa Android 7.0 (API 24) o posterior; `compileSdk` 36.
 - Solicita las credenciales de tu integración, el identificador del contrato y la licencia para el identificador de tu app.
 - Sigue la [guía de instalación](INSTALACION.md) para agregar el archivo de la SDK, sus dependencias y los permisos necesarios.
+- Review the [Android integration demo](Demo/AndroidBlinkIDIntegration/README.md) for a complete Jetpack Compose example.
 - Realiza las pruebas de cámara, documento y validación facial en un dispositivo físico.
 
 Esta entrega corresponde a producción. La configuración de compilación de tu app no cambia ese ambiente. Si necesitas otra entrega, solicítala a BecomeDigital con una licencia válida para el identificador de esa aplicación.
@@ -129,6 +130,7 @@ La respuesta dispone de `toJson()` si necesitas representarla como texto. Los er
 
 ## Guías de integración
 
+- [Android integration demo](Demo/AndroidBlinkIDIntegration/README.md)
 - [Instalación, dependencias, licencia y permisos](INSTALACION.md)
 - [Localización y claves admitidas](docs/PERSONALIZACION_TEXTOS.md)
 - [Resultados y errores](docs/ERRORES.md)
