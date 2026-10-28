@@ -1,25 +1,31 @@
-# Manejo de errores — Android
+# Resultados y errores en Android
 
-## Callbacks públicos
+## Manejar los callbacks
 
-| Callback | Manejo recomendado |
+| Callback | Acción de la app |
 | --- | --- |
-| `onFinish(response)` con `SUCCES` | Consulta el objeto opcional del flujo. En autenticación, evalúa también `authentication.result`. |
-| `onFinish(response)` con `ERROR` | Restaura la interfaz de la app y ofrece un nuevo intento iniciado por el usuario. |
-| `onFinish(response)` con `PENDING` o `NOFOUND` | No consideres aprobada la verificación. |
-| `onCancel()` | Regresa a la app sin aprobar la verificación. |
+| `onFinish(response)` con `SUCCES` | Consulta el resultado opcional correspondiente al flujo. En autenticación, evalúa también `authentication.result`. |
+| `onFinish(response)` con `ERROR` | Regresa a la interfaz de la app y ofrece un nuevo intento iniciado por el usuario. |
+| `onCancel()` | Regresa a la app sin considerar aprobada la verificación. |
+| Estado `PENDING` o `NOFOUND` | No consideres aprobada la verificación. |
 
-`SUCCES` conserva su escritura por compatibilidad. El mensaje de error o respuesta es descriptivo, no un código estable. Los objetos tipados `onboarding`, `verification` y `authentication` son opcionales. Cuando `performVerificationCheck=false`, `onboarding` confirma el inicio y no representa una aprobación final.
+`SUCCES` es el nombre del estado en la API pública. Los resultados `onboarding`, `verification` y `authentication` son opcionales. Con `performVerificationCheck=false`, `onboarding` confirma la creación del proceso, no su aprobación final. Los flujos de solo documentos no requieren un resultado facial.
 
-La SDK muestra los reintentos de captura disponibles dentro de su interfaz. La app no recibe un callback por cada intento de cámara que no se complete.
+El mensaje recibido describe lo sucedido; no es un código de error estable. No compares mensajes traducidos para aprobar verificaciones ni para iniciar reintentos automáticos. La SDK presenta las acciones disponibles para repetir una captura dentro de su interfaz; la app no recibe un callback por cada intento de cámara.
 
-## Problemas que puede resolver la app
+## Resolver problemas de integración
 
-- **Configuración incompleta:** revisa `clienId`, `clientSecret`, `contractId`, `userId` y los tipos documentales requeridos en onboarding.
-- **Cámara no disponible o permiso denegado:** revisa el dispositivo y el permiso de cámara en tiempo de ejecución.
-- **Licencia de captura:** revisa `app/src/main/assets/com.become.blinkid.key` y el `applicationId` autorizado.
-- **Conexión interrumpida:** permite que el usuario inicie un nuevo intento cuando se restablezca la conexión.
-- **Captura sin completar:** permite que el usuario vuelva a intentarlo dentro de la SDK.
-- **Sesión de verificación vencida o no válida:** cierra el flujo actual y permite que el usuario inicie una nueva verificación.
+| Situación | Qué revisar |
+| --- | --- |
+| No inicia la verificación | Credenciales, identificador del contrato y parámetros requeridos. Autenticación necesita un usuario existente. |
+| Cámara no disponible | Dispositivo físico, permiso de cámara y solicitud del permiso en tiempo de ejecución. |
+| Licencia no válida | Archivo `app/src/main/assets/com.become.blinkid.key` y coincidencia con el identificador exacto de la app. |
+| Falta un módulo, clase o recurso | Archivos y dependencias de la [guía de instalación](../INSTALACION.md). Evita mezclar versiones de distribuciones. |
+| Conexión interrumpida | Restablece la conexión y permite un nuevo intento iniciado por el usuario. |
+| Espera del resultado final | Revisa `pollingTimeoutSeconds` y `pollingMaxAttempts` según los tiempos que necesita tu integración. |
+| Captura incompleta | Permite que el usuario repita la captura y complete los lados solicitados. |
+| Sesión vencida o no válida | Finaliza el intento actual y permite iniciar una nueva verificación. |
 
-No compares mensajes localizados para decidir si se aprueba la verificación o si se ejecutan reintentos automáticos. Si el problema persiste, comparte con soporte la versión de la SDK, el dispositivo, el paso visible y los [registros de diagnóstico](LOGGING.md) relevantes. Excluye credenciales, contenido de licencias, documentos capturados y otros datos personales.
+## Solicitar soporte
+
+Incluye la versión de la SDK, modelo del dispositivo, versión del sistema, paso visible y descripción de cómo reproducir el problema. Si soporte necesita más información, activa temporalmente el [diagnóstico](LOGGING.md). Excluye credenciales, contenido de licencias, imágenes de documentos y datos personales.
