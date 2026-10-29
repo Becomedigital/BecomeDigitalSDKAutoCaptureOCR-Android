@@ -33,8 +33,7 @@ class BecomeSdkLauncher(
     }
 
     fun startOnboarding(userId: String) {
-        if (BuildConfig.BECOME_CLIENT_ID.isBlank() ||
-            BuildConfig.BECOME_CLIENT_SECRET.isBlank() ||
+        if (BuildConfig.BECOME_JWT.isBlank() ||
             BuildConfig.BECOME_CONTRACT_ID.isBlank()
         ) {
             onStatus(activity.getString(R.string.credentials_missing))
@@ -45,8 +44,7 @@ class BecomeSdkLauncher(
             return
         }
         val config = BDIVConfig(
-            BuildConfig.BECOME_CLIENT_ID,
-            BuildConfig.BECOME_CLIENT_SECRET,
+            BuildConfig.BECOME_JWT,
             BuildConfig.BECOME_CONTRACT_ID,
             arrayOf(DocumetType.DNI, DocumetType.PASSPORT),
             true,

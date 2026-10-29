@@ -4,6 +4,7 @@
 
 | Requisito | Valor de referencia |
 | --- | --- |
+| Distribución de BecomeDigital | 1.3.0 |
 | Android mínimo | 7.0, API 24 |
 | `compileSdk` / `targetSdk` | 36 / 36 |
 | Android Gradle Plugin | 9.0.1 |

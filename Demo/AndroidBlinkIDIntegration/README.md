@@ -1,23 +1,23 @@
 # Demo de integración para Android
 
-Esta aplicación muestra cómo iniciar una verificación de identidad desde una pantalla Jetpack Compose alojada en una `AppCompatActivity` y cómo recibir las respuestas de la SDK. Utiliza `becomedigitalsdk.aar` desde la raíz de esta distribución, sin duplicar el archivo binario en el demo.
+Esta aplicación utiliza el archivo de la SDK incluido en la raíz de esta distribución y la firma recomendada con JWT. Muestra cómo iniciar la verificación y recibir sus resultados desde una pantalla Jetpack Compose en una `AppCompatActivity`.
 
 ## Preparar el demo
 
-1. Abre este directorio en Android Studio. Usa JDK 21 para Gradle e instala Android SDK 36.
-2. En `app/build.gradle`, reemplaza `applicationId 'com.example.become.integration'` por el identificador de aplicación autorizado para tu licencia BlinkID.
-3. Copia `credentials.properties.example` como `credentials.properties` y completa `clientId`, `clientSecret` y `contractId` con los valores asignados a tu contrato.
-4. Crea `app/src/main/assets` si aún no existe y guarda la licencia BlinkID correspondiente a ese identificador de aplicación en `app/src/main/assets/com.become.blinkid.key`.
-5. Compila y ejecuta la aplicación en un dispositivo físico con Android 7.0 o posterior. Ingresa un ID de usuario y toca **Iniciar verificación**.
+1. Abre este directorio en Android Studio. Usa JDK 21 para Gradle y Android SDK 36.
+2. En `app/build.gradle`, usa el identificador de aplicación autorizado para tu licencia BlinkID.
+3. Copia `credentials.properties.example` como `credentials.properties`. Completa `jwt` y `contractId`.
+4. Agrega la licencia de tu app como `app/src/main/assets/com.become.blinkid.key`.
+5. Compila y ejecuta la app en un dispositivo físico con Android 7.0 o posterior. Ingresa un ID de usuario y toca **Iniciar verificación**.
 
-Solicita a BecomeDigital las credenciales, el identificador del contrato y la licencia correspondientes a tu aplicación. Estos datos no se incluyen en el demo. El proyecto compila sin ellos, pero la aplicación muestra un aviso y no inicia la verificación hasta que estén presentes la configuración y la licencia. Los archivos locales se excluyen de Git. `BuildConfig` incorpora las credenciales en el APK compilado localmente; no distribuyas una compilación que contenga credenciales de prueba. `BecomeSdkLauncher.kt` activa los registros de diagnóstico para las pruebas manuales.
+El JWT debe estar vigente, corresponder a producción y autorizar tu contrato y flujo. Introduce solo el token, sin el prefijo `Bearer `. Los archivos de configuración y licencia son locales y sus valores no se incluyen en esta distribución.
 
-## Estructura del proyecto
+## Usar el ejemplo en tu aplicación
 
-- `MainActivity.kt` aloja la interfaz Compose en una `AppCompatActivity`.
-- `VerificationScreen.kt` recibe el ID de usuario, solicita el permiso de cámara y llama al lanzador.
-- `BecomeSdkLauncher.kt` comprueba la configuración y la licencia locales, crea `BDIVConfig`, conserva el administrador de callbacks y maneja la finalización o cancelación.
-- `app/src/main/res/values-es` muestra la localización al español de la aplicación anfitriona y los textos admitidos por la SDK.
-- `app/build.gradle` declara el AAR de la SDK y sus dependencias necesarias. `AndroidManifest.xml` declara la actividad y el permiso de cámara.
+El archivo `credentials.properties` permite introducir un JWT únicamente para esta prueba local. El valor queda incorporado a la app compilada; no publiques una app con un token de prueba. En tu integración real, obtén el JWT desde tu backend antes de iniciar la SDK y renueva los tokens vencidos. El demo no solicita ni renueva tokens.
 
-Consulta la [guía de instalación](../../INSTALACION.md), la [guía de localización](../../docs/PERSONALIZACION_TEXTOS.md), la [guía de diagnóstico](../../docs/LOGGING.md) y la [guía de errores](../../docs/ERRORES.md) para adaptar esta integración a tu aplicación.
+Si falta la configuración o la licencia, el demo muestra un mensaje y no inicia la verificación. `BecomeSdkLauncher.kt` crea `BDIVConfig`, conserva los objetos necesarios y maneja los callbacks. La configuración local de diagnóstico sirve para revisar tus pruebas; desactívala al terminar.
+
+La firma con credenciales sigue disponible y deprecada. Los ejemplos de ambas firmas y los pasos de migración están en la [guía de autenticación](../../AUTENTICACION.md).
+
+Consulta también la [instalación](../../INSTALACION.md), [localización](../../docs/PERSONALIZACION_TEXTOS.md), [diagnóstico](../../docs/LOGGING.md) y [manejo de errores](../../docs/ERRORES.md).
