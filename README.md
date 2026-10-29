@@ -5,7 +5,7 @@ Integra la verificación de identidad en tu aplicación: onboarding, autenticaci
 ## Antes de comenzar
 
 - Usa Android 7.0 (API 24) o posterior; `compileSdk` 36.
-- Solicita las credenciales de tu integración, el identificador del contrato y la licencia para el identificador de tu app.
+- Obtén un JWT vigente desde el backend de tu integración y solicita el identificador del contrato y la licencia para tu app.
 - Sigue la [guía de instalación](INSTALACION.md) para agregar el archivo de la SDK, sus dependencias y los permisos necesarios.
 - Realiza las pruebas de cámara, documento y validación facial en un dispositivo físico.
 
@@ -61,7 +61,7 @@ class VerificationActivity : AppCompatActivity() {
         )
 
         val config = BDIVConfig(
-            "TU_CLIENT_ID", "TU_CLIENT_SECRET", "TU_CONTRACT_ID",
+            "TU_JWT_VIGENTE", "TU_CONTRACT_ID",
             arrayOf(DocumetType.DNI, DocumetType.PASSPORT),
             true, "TU_USER_ID"
         )
@@ -72,17 +72,21 @@ class VerificationActivity : AppCompatActivity() {
 }
 ```
 
-Los nombres `clienId`, `DocumetType`, `BecomeInterfaseCallback` y `SUCCES` corresponden a la API pública. `startAuthentication` inicia el flujo seleccionado en `config.flow`, incluido onboarding.
+Los nombres `DocumetType`, `BecomeInterfaseCallback` y `SUCCES` corresponden a la API pública. `startAuthentication` inicia el flujo seleccionado en `config.flow`, incluido onboarding.
 
 ### Autenticación de un usuario existente
 
 Asigna `config.flow = BDIVConfig.Flow.Authentication` y un `userId` existente. Cuando no se soliciten documentos, puedes pasar `emptyArray()` en el constructor.
 
+La versión **1.3.0** recomienda la firma con JWT. La firma con credenciales permanece disponible y deprecada; consulta los [ejemplos y pasos de migración](AUTENTICACION.md).
+
 ## Configurar la integración
 
 | Parámetro | Valor predeterminado | Uso |
 | --- | --- | --- |
-| `clienId`, `clientSecret`, `contractId` | Argumentos requeridos | Credenciales e identificador del contrato asignados a tu integración; no deben estar vacíos. |
+| `jwt` | Requerido en la firma recomendada | Token vigente obtenido por tu integración, sin el prefijo `Bearer `. |
+| `contractId` | Argumento requerido | Identificador del contrato asignado a tu integración. |
+| `clienId`, `clientSecret` | Solo firma deprecada | Se conservan para integraciones existentes. Para nuevas integraciones, utiliza `jwt`. |
 | `userId` | Argumento requerido | Identificador del usuario. Debe estar informado en autenticación; onboarding también admite una cadena vacía. |
 | `documentTypes` | Argumento requerido | Tipos de documento: `DNI`, `PASSPORT`, `LICENSE`. Una lista vacía utiliza los tipos disponibles para el contrato. |
 | `allowLibraryLoading` | Argumento requerido | Se conserva en el constructor por compatibilidad. No selecciona ni sustituye el modo de captura del contrato. |
@@ -131,6 +135,7 @@ La respuesta dispone de `toJson()` si necesitas representarla como texto. Los er
 
 - [Demo de integración para Android con Jetpack Compose](Demo/AndroidBlinkIDIntegration/README.md)
 - [Instalación, dependencias, licencia y permisos](INSTALACION.md)
+- [Inicialización con JWT y firma deprecada](AUTENTICACION.md)
 - [Localización y claves admitidas](docs/PERSONALIZACION_TEXTOS.md)
 - [Resultados y errores](docs/ERRORES.md)
 - [Diagnóstico y soporte](docs/LOGGING.md)
