@@ -1,5 +1,13 @@
 # Cambios de la SDK
 
+## JWT por operación — 29 de octubre de 2026
+
+- Permite utilizar JWT diferentes para crear la verificación y consultar su resultado mediante `verificationResultsJwt`.
+- Conserva las firmas anteriores y los resultados de las integraciones existentes.
+- Actualiza el ejemplo y el diagnóstico de rechazos HTTP 403 en la consulta.
+
+Consulta los [ejemplos de configuración y migración](AUTENTICACION.md).
+
 ## 1.3.0 — 29 de octubre de 2026
 
 - Agrega la firma de inicialización con JWT obtenido por la integración.

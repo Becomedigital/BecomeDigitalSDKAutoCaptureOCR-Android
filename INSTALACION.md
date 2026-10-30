@@ -6,6 +6,7 @@
 | --- | --- |
 | Distribución de BecomeDigital | 1.3.0 |
 | Android mínimo | 7.0, API 24 |
+| Arquitecturas de captura | ARMv7 (`armeabi-v7a`) y ARM64 (`arm64-v8a`) |
 | `compileSdk` / `targetSdk` | 36 / 36 |
 | Android Gradle Plugin | 9.0.1 |
 | Gradle | 9.2.1 |
@@ -146,3 +147,9 @@ La SDK incluye estas declaraciones. Solicita el permiso de cámara en tiempo de 
 Consulta el [ejemplo de inicialización](README.md#iniciar-una-verificación), las [claves de localización](docs/PERSONALIZACION_TEXTOS.md) y la [configuración de R8](docs/R8.md). Prueba la app final en un dispositivo físico, incluida su versión de publicación.
 
 El [demo de integración para Android](Demo/AndroidBlinkIDIntegration/README.md) muestra estos pasos en una aplicación con pantalla Jetpack Compose, actividad `AppCompatActivity` y manejo de respuestas de la SDK.
+
+## Arquitecturas y emuladores
+
+La dependencia BlinkID Core 8002.0.0 incluye el motor de captura para ARMv7 y ARM64; no incluye una biblioteca nativa `x86_64`. Consulta los [requisitos de arquitectura del proveedor](https://github.com/microblink/blinkid-android#processor-architecture). Una app puede compilar y contener otras bibliotecas para `x86_64` sin que esto habilite la captura documental en esa arquitectura.
+
+Para revisar la integración en un emulador, utiliza una arquitectura ARM compatible con las dependencias de captura. Las pruebas funcionales de cámara, documento y rostro se realizan en un dispositivo físico con la licencia correspondiente a la app.

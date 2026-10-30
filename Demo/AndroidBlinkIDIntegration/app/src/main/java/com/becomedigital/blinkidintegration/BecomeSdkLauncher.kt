@@ -34,6 +34,7 @@ class BecomeSdkLauncher(
 
     fun startOnboarding(userId: String) {
         if (BuildConfig.BECOME_JWT.isBlank() ||
+            BuildConfig.BECOME_RESULTS_JWT.isBlank() ||
             BuildConfig.BECOME_CONTRACT_ID.isBlank()
         ) {
             onStatus(activity.getString(R.string.credentials_missing))
@@ -50,6 +51,7 @@ class BecomeSdkLauncher(
             true,
             userId
         )
+        config.verificationResultsJwt = BuildConfig.BECOME_RESULTS_JWT
         config.flow = BDIVConfig.Flow.Onboarding
         config.setDebugLogsEnabled(true)
         onStatus(activity.getString(R.string.status_starting))

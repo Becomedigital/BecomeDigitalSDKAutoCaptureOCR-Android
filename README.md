@@ -61,16 +61,19 @@ class VerificationActivity : AppCompatActivity() {
         )
 
         val config = BDIVConfig(
-            "TU_JWT_VIGENTE", "TU_CONTRACT_ID",
+            "TU_JWT_DE_CREACION", "TU_CONTRACT_ID",
             arrayOf(DocumetType.DNI, DocumetType.PASSPORT),
             true, "TU_USER_ID"
         )
+        config.verificationResultsJwt = "TU_JWT_DE_CONSULTA"
         config.flow = BDIVConfig.Flow.Onboarding
         config.themeMode = BDIVConfig.ThemeMode.system
         BecomeResponseManager.getInstance().startAuthentication(this, config)
     }
 }
 ```
+
+Para onboarding con consulta final, recibe desde tu backend el JWT de creación (`verification:create`) y el de consulta (`verification:get`). Asígnalos a `jwt` y `verificationResultsJwt`, respectivamente. Consulta el [diagnóstico de HTTP 403](AUTENTICACION.md#creación-correcta-y-consulta-con-http-403).
 
 Los nombres `DocumetType`, `BecomeInterfaseCallback` y `SUCCES` corresponden a la API pública. `startAuthentication` inicia el flujo seleccionado en `config.flow`, incluido onboarding.
 
@@ -85,6 +88,7 @@ La versión **1.3.0** recomienda la firma con JWT. La firma con credenciales per
 | Parámetro | Valor predeterminado | Uso |
 | --- | --- | --- |
 | `jwt` | Requerido en la firma recomendada | Token vigente obtenido por tu integración, sin el prefijo `Bearer `. |
+| `verificationResultsJwt` | `null` | JWT para consultar el resultado de onboarding. Asígnalo después de `setJwt(...)` y antes de iniciar. Si se omite, se conserva el uso del token principal; no modifica la firma deprecada. |
 | `contractId` | Argumento requerido | Identificador del contrato asignado a tu integración. |
 | `clienId`, `clientSecret` | Solo firma deprecada | Se conservan para integraciones existentes. Para nuevas integraciones, utiliza `jwt`. |
 | `userId` | Argumento requerido | Identificador del usuario. Debe estar informado en autenticación; onboarding también admite una cadena vacía. |
