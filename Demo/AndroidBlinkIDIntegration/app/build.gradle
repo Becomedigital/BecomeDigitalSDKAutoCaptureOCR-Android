@@ -20,6 +20,7 @@ android {
         minSdk 24
         targetSdk 36
         buildConfigField 'String', 'BECOME_JWT', '"' + localCredential('jwt') + '"'
+        buildConfigField 'String', 'BECOME_RESULTS_JWT', '"' + localCredential('verificationResultsJwt') + '"'
         buildConfigField 'String', 'BECOME_CONTRACT_ID', '"' + localCredential('contractId') + '"'
     }
     buildTypes {

@@ -18,6 +18,7 @@ El mensaje recibido describe lo sucedido; no es un código de error estable. No 
 | Situación | Qué revisar |
 | --- | --- |
 | No inicia la verificación | JWT vigente, identificador del contrato y parámetros requeridos; si usas la firma deprecada, revisa sus credenciales. Autenticación necesita un usuario existente. |
+| Creación correcta y HTTP 403 al consultar | Comprueba `jwt` con permiso de creación y `verificationResultsJwt` con permiso de consulta. Cambiar solo el token principal a `verification:get` deja sin cubrir la creación. Revisa vigencia, ambiente y contrato; consulta la [guía de autenticación](../AUTENTICACION.md#creación-correcta-y-consulta-con-http-403). |
 | Cámara no disponible | Dispositivo físico, permiso de cámara y solicitud del permiso en tiempo de ejecución. |
 | Licencia no válida | Archivo `app/src/main/assets/com.become.blinkid.key` y coincidencia con el identificador exacto de la app. |
 | Falta un módulo, clase o recurso | Archivos y dependencias de la [guía de instalación](../INSTALACION.md). Evita mezclar versiones de distribuciones. |
