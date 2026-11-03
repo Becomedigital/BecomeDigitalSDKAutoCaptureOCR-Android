@@ -81,7 +81,7 @@ Los nombres `DocumetType`, `BecomeInterfaseCallback` y `SUCCES` corresponden a l
 
 Asigna `config.flow = BDIVConfig.Flow.Authentication` y un `userId` existente. Cuando no se soliciten documentos, puedes pasar `emptyArray()` en el constructor.
 
-La versión **1.3.0** recomienda la firma con JWT. La firma con credenciales permanece disponible y deprecada; consulta los [ejemplos y pasos de migración](AUTENTICACION.md).
+Esta entrega recomienda la firma con JWT. La firma con credenciales permanece disponible y deprecada; consulta los [ejemplos y pasos de migración](AUTENTICACION.md).
 
 ## Configurar la integración
 

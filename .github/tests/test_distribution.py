@@ -101,6 +101,70 @@ class Artifacts(unittest.TestCase):
                 d.audit_android({'artifacts':[], 'native_dependencies':[
                     {'coordinate':'com.microblink:blinkid-core:8002.0.0', 'requires_native':True}]})
 
+    def blinkid_arm_config(self):
+        return {'repository':'Becomedigital/BecomeDigitalSDKAutoCaptureOCR-Android',
+                'required_abis':['armeabi-v7a','arm64-v8a'], 'artifacts':[],
+                'native_dependencies':[{'coordinate':'com.microblink:blinkid-core:8002.0.0',
+                                        'requires_native':True}]}
+
+    def test_blinkid_accepts_transitive_armv7_and_arm64_capture(self):
+        dependency = d.zip_bytes({'jni/armeabi-v7a/libBlinkID.so':elf(40),
+                                  'jni/arm64-v8a/libBlinkID.so':elf(183)})
+        with patch.object(d, 'native_dependency', return_value=dependency):
+            self.assertIsNone(d.audit_android(self.blinkid_arm_config()))
+
+    def test_blinkid_rejects_losing_either_required_arm_abi(self):
+        for present,machine,missing in [('armeabi-v7a',40,'arm64-v8a'),('arm64-v8a',183,'armeabi-v7a')]:
+            dependency = d.zip_bytes({f'jni/{present}/libBlinkID.so':elf(machine)})
+            with self.subTest(present=present), patch.object(d, 'native_dependency', return_value=dependency):
+                with self.assertRaisesRegex(d.Invalid, missing):
+                    d.audit_android(self.blinkid_arm_config())
+
+    def test_blinkid_arm_policy_is_scoped_to_its_distribution(self):
+        config = self.blinkid_arm_config()
+        config['repository'] = 'Becomedigital/AnotherSDK-Android'
+        with self.assertRaisesRegex(d.Invalid, 'x86_64'):
+            d.android_required_abis(config)
+
+    def test_blinkid_cannot_remove_arm_architectures_from_its_policy(self):
+        for required in [[], ['arm64-v8a'], ['armeabi-v7a']]:
+            config = self.blinkid_arm_config();config['required_abis'] = required
+            with self.subTest(required=required), self.assertRaisesRegex(d.Invalid, 'ARMv7 y ARM64'):
+                d.android_required_abis(config)
+
+    def test_blinkid_policy_rejects_unknown_abis(self):
+        config = self.blinkid_arm_config();config['required_abis'].append('unknown')
+        with self.assertRaisesRegex(d.Invalid, 'desconocida'):
+            d.android_required_abis(config)
+
+    def test_blinkid_requires_matching_native_libraries_in_both_arm_abis(self):
+        dependency = d.zip_bytes({'jni/armeabi-v7a/libOther.so':elf(40),
+                                  'jni/arm64-v8a/libBlinkID.so':elf(183)})
+        with patch.object(d, 'native_dependency', return_value=dependency):
+            with self.assertRaisesRegex(d.Invalid, 'difieren entre ABIs'):
+                d.audit_android(self.blinkid_arm_config())
+
+    def test_blinkid_apk_keeps_required_arm_libraries_and_other_abis(self):
+        dependency = d.zip_bytes({'jni/armeabi-v7a/libBlinkID.so':elf(40),
+                                  'jni/arm64-v8a/libBlinkID.so':elf(183)})
+        apk = d.zip_bytes({'lib/armeabi-v7a/libBlinkID.so':elf(40),
+                          'lib/arm64-v8a/libBlinkID.so':elf(183), 'lib/x86_64/libOther.so':elf(62)})
+        with tempfile.TemporaryDirectory() as temporary, patch.object(d, 'native_dependency', return_value=dependency):
+            path = Path(temporary)/'app.apk';path.write_bytes(apk)
+            d.verify_apk(self.blinkid_arm_config(), path)
+            self.assertEqual(path.read_bytes(), apk)
+            path.write_bytes(d.zip_bytes({'lib/arm64-v8a/libBlinkID.so':elf(183)}))
+            with self.assertRaisesRegex(d.Invalid, 'armeabi-v7a'):
+                d.verify_apk(self.blinkid_arm_config(), path)
+
+    def test_blinkid_additional_required_abi_is_still_enforced(self):
+        config = self.blinkid_arm_config();config['required_abis'].append('x86_64')
+        dependency = d.zip_bytes({'jni/armeabi-v7a/libBlinkID.so':elf(40),
+                                  'jni/arm64-v8a/libBlinkID.so':elf(183)})
+        with patch.object(d, 'native_dependency', return_value=dependency):
+            with self.assertRaisesRegex(d.Invalid, 'x86_64'):
+                d.audit_android(config)
+
     def test_apk_must_include_native_libraries_from_transitive_dependencies(self):
         dependency = d.zip_bytes({'classes.jar':d.zip_bytes({'Type.class':b'class'}),
                                  'jni/arm64-v8a/libBlinkID.so':elf(183)})
