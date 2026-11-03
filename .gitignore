@@ -15,3 +15,8 @@ xcuserdata/
 *.keystore
 keystore.properties
 local.properties
+
+# Paquetes y cachés locales
+dist/
+__pycache__/
+*.pyc
