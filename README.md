@@ -1,15 +1,30 @@
-# SDK de BecomeDigital AutoCapture OCR para Android
+# BecomeDigital AutoCapture OCR para Android
 
-Integra la verificación de identidad en tu aplicación: onboarding, autenticación, captura automática de documentos con reconocimiento OCR y alternativa manual, y validación facial. Esta distribución incluye `becomedigitalsdk.aar`.
+Integra la verificación de identidad en tu aplicación: onboarding, autenticación, captura automática de documentos con reconocimiento OCR y alternativa manual, y validación facial.
 
 ## Antes de comenzar
 
 - Usa Android 7.0 (API 24) o posterior; `compileSdk` 36.
 - Obtén un JWT vigente desde el backend de tu integración y solicita el identificador del contrato y la licencia para tu app.
-- Sigue la [guía de instalación](INSTALACION.md) para agregar el archivo de la SDK, sus dependencias y los permisos necesarios.
+- Sigue la [guía de instalación](INSTALACION.md) para agregar BecomeDigital mediante Maven Central, con una versión exacta, y configurar los permisos de tu app.
 - Realiza las pruebas de cámara, documento y validación facial en un dispositivo físico.
 
 Esta entrega corresponde a producción. La configuración de compilación de tu app no cambia ese ambiente. Si necesitas otra entrega, solicítala a BecomeDigital con una licencia válida para el identificador de esa aplicación.
+
+## Instalación con versión exacta
+
+Con `google()` y `mavenCentral()` configurados, agrega al módulo de tu app:
+
+```groovy
+dependencies {
+    implementation "ai.becomedigital:identity-verification:3.5.1-rc.1"
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.5"
+}
+```
+
+Gradle descarga BecomeDigital y resuelve automáticamente las dependencias descritas por el POM. Completa la [configuración de desugaring, la licencia de la app y los permisos](INSTALACION.md). Si vienes de un AAR local, sigue la [guía de migración](MIGRACION.md).
+
+`3.5.1-rc.1` es la versión candidata publicada que utiliza esta guía. Usa una versión exacta para tu integración.
 
 ## Iniciar una verificación
 
@@ -137,8 +152,9 @@ La respuesta dispone de `toJson()` si necesitas representarla como texto. Los er
 
 ## Guías de integración
 
-- [Demo de integración para Android con Jetpack Compose](Demo/AndroidBlinkIDIntegration/README.md)
-- [Instalación, dependencias, licencia y permisos](INSTALACION.md)
+- [Demo de integración para Android](Demo/AndroidBlinkIDIntegration/README.md)
+- [Instalación con Maven Central, licencia y permisos](INSTALACION.md)
+- [Migración desde la integración por archivo](MIGRACION.md)
 - [Inicialización con JWT y firma deprecada](AUTENTICACION.md)
 - [Localización y claves admitidas](docs/PERSONALIZACION_TEXTOS.md)
 - [Resultados y errores](docs/ERRORES.md)
@@ -146,7 +162,7 @@ La respuesta dispone de `toJson()` si necesitas representarla como texto. Los er
 - [Protección contra capturas de pantalla](SCREEN_CAPTURE_CONFIGURATION.md)
 - [Optimización de la app con R8](docs/R8.md)
 - [Configuración opcional del tiempo de conexión](examples/network-config/res/values/become_config.xml)
-- [Cambios de la SDK](CHANGELOG.md)
+- [Cambios de BecomeDigital](CHANGELOG.md)
 
 Antes de publicar tu app, comprueba los permisos, la captura de los lados solicitados, los reintentos, la validación facial, los idiomas personalizados, la cancelación y el manejo de resultados.
 

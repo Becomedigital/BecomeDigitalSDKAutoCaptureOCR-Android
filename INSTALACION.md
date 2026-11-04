@@ -1,77 +1,55 @@
-# Instalación de la SDK para Android
+# Instalación para Android con Maven Central
+
+Agrega BecomeDigital como una dependencia de tu aplicación. Gradle consulta el POM publicado en Maven Central y descarga automáticamente las bibliotecas necesarias para la integración; no debes copiarlas ni declararlas una por una.
 
 ## Requisitos
 
 | Requisito | Valor de referencia |
 | --- | --- |
-| Distribución de BecomeDigital | 3.5.1 |
+| Versión publicada usada en esta guía | `3.5.1-rc.1` |
+| Coordenada Maven | `ai.becomedigital:identity-verification:3.5.1-rc.1` |
 | Android mínimo | 7.0, API 24 |
-| Arquitecturas de captura | ARMv7 (`armeabi-v7a`) y ARM64 (`arm64-v8a`) |
-| `compileSdk` / `targetSdk` | 36 / 36 |
+| Arquitecturas admitidas | ARMv7 (`armeabi-v7a`) y ARM64 (`arm64-v8a`) |
+| `compileSdk` / `targetSdk` de referencia | 36 / 36 |
 | Android Gradle Plugin | 9.0.1 |
 | Gradle | 9.2.1 |
 | JDK para esta configuración | 21 |
 | Compatibilidad de Java y Kotlin | 11 |
-| Kotlin y plugin de Compose | 2.2.10 |
-| Compose BOM | 2026.06.00 |
-| Captura documental | BlinkID Core / UX 8002.0.0 |
-| Amplify Face Liveness / Cognito | 1.10.0 / 2.33.0 |
-| CameraX | 1.5.3 |
+| Kotlin | 2.2.10 |
 
-Selecciona JDK 21 para Gradle en Android Studio al utilizar esta configuración. La compatibilidad Java 11 indicada en el ejemplo se refiere al código de la aplicación. Mantén el plugin de Compose en la misma versión que Kotlin y utiliza la BOM indicada para las librerías de Compose.
+`3.5.1-rc.1` es una versión candidata para evaluación. La versión interna de la biblioteca es `3.5.1`. Selecciona JDK 21 para Gradle en Android Studio al usar esta configuración; la compatibilidad Java 11 se refiere al código de la aplicación.
 
-## Agregar los archivos
+## 1. Configurar los repositorios
 
-Copia los siguientes archivos en `app/libs`:
-
-- `becomedigitalsdk.aar`, incluido en la raíz del repositorio.
-
-Al integrar un AAR local, declara también las dependencias que se muestran a continuación. Inclúyelas aunque tu contrato no muestre todos los pasos. Si reemplazas otra distribución, retira sus archivos y dependencias de captura anteriores para evitar duplicados.
-
-## Configurar Gradle
-
-### Archivo raíz `build.gradle`
+En `settings.gradle`, incorpora estos repositorios al bloque de dependencias existente:
 
 ```groovy
-buildscript {
-    ext.kotlin_version = "2.2.10"
+dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:9.0.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:compose-compiler-gradle-plugin:$kotlin_version"
     }
 }
 ```
 
-Configura `google()` y `mavenCentral()` como repositorios de dependencias de tu aplicación.
+La misma configuración en `settings.gradle.kts`:
 
-### Archivo `gradle.properties`
-
-Utiliza estas opciones con la configuración de Android Gradle Plugin y Kotlin mostrada en esta guía:
-
-```properties
-android.useAndroidX=true
-android.enableJetifier=true
-android.builtInKotlin=false
-android.newDsl=false
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
 ```
 
-### Módulo de la aplicación
+No necesitas configurar un repositorio privado ni credenciales de descarga para este paquete.
 
-En `app/build.gradle`, conserva las dependencias y sus versiones. Usa el `applicationId` real de tu app, que debe coincidir con su licencia:
+## 2. Agregar BecomeDigital al módulo de la app
+
+En `app/build.gradle` con Groovy:
 
 ```groovy
-plugins {
-    id "com.android.application"
-    id "org.jetbrains.kotlin.android"
-    id "org.jetbrains.kotlin.plugin.compose"
-}
-
 android {
     compileSdk 36
     defaultConfig {
@@ -84,54 +62,61 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions { jvmTarget = "11" }
-    buildFeatures { compose true }
 }
 
 dependencies {
-    implementation files("libs/becomedigitalsdk.aar")
-    implementation platform("androidx.compose:compose-bom:2026.06.00")
+    implementation "ai.becomedigital:identity-verification:3.5.1-rc.1"
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.5"
-
-    implementation "androidx.appcompat:appcompat:1.6.1"
-    implementation "androidx.constraintlayout:constraintlayout:2.1.4"
-    implementation "androidx.core:core-ktx:1.10.1"
-    implementation "androidx.activity:activity-ktx:1.8.2"
-    implementation "androidx.fragment:fragment-ktx:1.6.2"
-    implementation "androidx.navigation:navigation-fragment:2.5.3"
-    implementation "androidx.navigation:navigation-ui:2.5.3"
-
-    implementation "androidx.camera:camera-core:1.5.3"
-    implementation "androidx.camera:camera-camera2:1.5.3"
-    implementation "androidx.camera:camera-view:1.5.3"
-    implementation "androidx.camera:camera-lifecycle:1.5.3"
-    implementation "com.google.guava:guava:33.3.1-android"
-
-    implementation "com.google.code.gson:gson:2.10.1"
-    implementation "com.squareup.okhttp3:okhttp:4.9.3"
-    implementation "com.android.volley:volley:1.2.1"
-    implementation "com.github.bumptech.glide:glide:4.10.0"
-
-    implementation "com.amplifyframework.ui:liveness:1.10.0"
-    implementation "com.amplifyframework:aws-auth-cognito:2.33.0"
-    implementation "androidx.compose.material3:material3"
-    implementation "androidx.activity:activity-compose:1.12.4"
-
-    implementation "com.microblink:blinkid-core:8002.0.0"
-    implementation "com.microblink:blinkid-ux:8002.0.0"
-
-    implementation "androidx.room:room-runtime:2.6.1"
-    implementation "androidx.lifecycle:lifecycle-livedata:2.8.7"
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.8.7"
 }
 ```
 
-Compose es necesario para esta integración. Si la app ya usa alguna dependencia de la lista, alinea su versión para evitar conflictos.
+El equivalente en `app/build.gradle.kts` con Kotlin DSL:
 
-## Agregar la licencia
+```kotlin
+android {
+    compileSdk = 36
+    defaultConfig {
+        minSdk = 24
+        targetSdk = 36
+    }
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions { jvmTarget = "11" }
+}
+
+dependencies {
+    implementation("ai.becomedigital:identity-verification:3.5.1-rc.1")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
+}
+```
+
+Incorpora estos bloques a la configuración existente de tu módulo. Conserva su `namespace`, su `applicationId` y los plugins que utiliza tu aplicación. El `applicationId` debe coincidir con el autorizado para tu licencia.
+
+La única dependencia de implementación que debes agregar para BecomeDigital es `ai.becomedigital:identity-verification`. El POM declara sus dependencias transitivas. `coreLibraryDesugaring` es una configuración de compilación de la app necesaria para utilizar las API de Java requeridas en las versiones de Android admitidas; configúrala además de la dependencia de BecomeDigital.
+
+Usa la versión exacta indicada, sin rangos ni versiones dinámicas. Conserva las dependencias que tu aplicación utiliza directamente; si existe un conflicto de versiones, revisa sus requisitos junto con soporte.
+
+Con Android Gradle Plugin 9.0.1 y el plugin Kotlin de esta configuración, conserva estas opciones de `gradle.properties`:
+
+```properties
+android.useAndroidX=true
+android.enableJetifier=true
+android.builtInKotlin=false
+android.newDsl=false
+```
+
+Si vienes de la integración por archivo, sigue la [migración a Maven Central](MIGRACION.md) para retirar las referencias locales anteriores.
+
+## 3. Agregar la licencia de la app
 
 Solicita a BecomeDigital la licencia emitida para el `applicationId` de tu app y agrégala como **`app/src/main/assets/com.become.blinkid.key`**. Una variante con otro identificador requiere su propia licencia. No compartas el contenido de la licencia en registros ni documentación.
 
-## Permisos
+Los permisos de uso de esta versión se describen en las [condiciones de uso](README.md#condiciones-de-uso). El acceso y consumo de los servicios requieren el contrato y las credenciales correspondientes.
+
+## 4. Configurar permisos
 
 La integración requiere los permisos de Internet y cámara:
 
@@ -142,14 +127,25 @@ La integración requiere los permisos de Internet y cámara:
 
 La SDK incluye estas declaraciones. Solicita el permiso de cámara en tiempo de ejecución antes de iniciar un flujo que lo requiera. Conserva las declaraciones que la SDK incorpora al manifiesto de tu app. Si tu contrato utiliza ubicación, revisa también los permisos correspondientes.
 
-## Continuar con la integración
+## 5. Comprobar la integración
 
-Consulta el [ejemplo de inicialización](README.md#iniciar-una-verificación), las [claves de localización](docs/PERSONALIZACION_TEXTOS.md) y la [configuración de R8](docs/R8.md). Prueba la app final en un dispositivo físico, incluida su versión de publicación.
+1. Sincroniza el proyecto en Android Studio y confirma que Gradle resuelva `ai.becomedigital:identity-verification:3.5.1-rc.1`.
+2. Sigue el [ejemplo de inicialización](README.md#iniciar-una-verificación) con los JWT y el contrato de tu integración.
+3. Compila las variantes de desarrollo y publicación de tu app. Si utilizas optimización, sigue la [configuración de R8](docs/R8.md).
+4. En un dispositivo físico compatible, revisa permisos, captura documental, validación facial, cancelación y resultados. Usa también la variante de publicación de tu app.
 
-El [demo de integración para Android](Demo/AndroidBlinkIDIntegration/README.md) muestra estos pasos en una aplicación con pantalla Jetpack Compose, actividad `AppCompatActivity` y manejo de respuestas de la SDK.
+Consulta la [localización](docs/PERSONALIZACION_TEXTOS.md), el [manejo de errores](docs/ERRORES.md) y el [demo de integración](Demo/AndroidBlinkIDIntegration/README.md) para continuar.
 
 ## Arquitecturas y emuladores
 
-La dependencia BlinkID Core 8002.0.0 incluye el motor de captura para ARMv7 y ARM64; no incluye una biblioteca nativa `x86_64`. Consulta los [requisitos de arquitectura del proveedor](https://github.com/microblink/blinkid-android#processor-architecture). Una app puede compilar y contener otras bibliotecas para `x86_64` sin que esto habilite la captura documental en esa arquitectura.
+Esta distribución admite ARMv7 y ARM64. No ofrece soporte de captura documental para `x86_64`. Para revisar la integración en un emulador, utiliza una arquitectura ARM compatible; las pruebas funcionales de cámara, documento y rostro se realizan en un dispositivo físico con una licencia válida para la app.
 
-Para revisar la integración en un emulador, utiliza una arquitectura ARM compatible con las dependencias de captura. Las pruebas funcionales de cámara, documento y rostro se realizan en un dispositivo físico con la licencia correspondiente a la app.
+## Resolver problemas de instalación
+
+| Situación | Qué revisar |
+| --- | --- |
+| Gradle no encuentra el paquete | Comprueba `mavenCentral()`, `google()`, la coordenada completa, la versión exacta publicada y la conexión. |
+| Clases duplicadas | Retira el AAR local y sus referencias anteriores siguiendo la [guía de migración](MIGRACION.md). |
+| Se requiere desugaring | Habilita `coreLibraryDesugaringEnabled` y agrega la configuración indicada para el módulo de la app. |
+| La verificación no acepta la licencia | Comprueba el nombre del archivo y el `applicationId` autorizado. |
+| Falla la variante con optimización | Conserva las reglas de compatibilidad incluidas y revisa la [guía de R8](docs/R8.md). |

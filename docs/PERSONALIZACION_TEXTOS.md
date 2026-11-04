@@ -8,10 +8,10 @@ Los archivos locales son opcionales para las instrucciones de captura, prueba de
 
 ## Claves admitidas
 
-| Componente | Versión de esta distribución | Prefijo de las claves |
-| --- | --- | --- |
-| BlinkID UX | 8002.0.0 | `mb_blinkid_*` |
-| Amplify Face Liveness | 1.10.0 | `amplify_ui_liveness_*` |
+| Función | Prefijo de las claves |
+| --- | --- |
+| Captura documental | `mb_blinkid_*` |
+| Validación facial | `amplify_ui_liveness_*` |
 
 Usa el [ejemplo en español](../examples/custom-texts/res/values/strings.xml) y el [ejemplo en inglés](../examples/custom-texts/res/values-b+en/strings.xml) para consultar los nombres exactos y sus valores de referencia. Los nombres difieren entre plataformas y distribuciones; usa solo las claves que corresponden a esta entrega.
 
@@ -32,7 +32,7 @@ También puedes adaptar estos mensajes locales:
 </resources>
 ```
 
-Agrega las entradas a `app/src/main/res/values/become_strings.xml`. Para otros idiomas utiliza carpetas como `values-es` y `values-en`; evita definir el mismo idioma simultáneamente en `values-en` y `values-b+en`. Algunas instrucciones de Amplify pueden estar asignadas al contrato; el valor local se utiliza cuando esa instrucción no tiene un texto configurado.
+Agrega las entradas a `app/src/main/res/values/become_strings.xml`. Para otros idiomas utiliza carpetas como `values-es` y `values-en`; evita definir el mismo idioma simultáneamente en `values-en` y `values-b+en`. Algunas instrucciones de validación facial pueden estar asignadas al contrato; el valor local se utiliza cuando esa instrucción no tiene un texto configurado.
 
 ## Comprobar la personalización
 
