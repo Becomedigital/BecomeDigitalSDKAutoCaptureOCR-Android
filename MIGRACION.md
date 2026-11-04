@@ -7,7 +7,7 @@ Estos pasos permiten pasar de la integración de BecomeDigital mediante un AAR l
 1. Retira la declaración `implementation files("libs/becomedigitalsdk.aar")` o la referencia equivalente que utiliza tu aplicación.
 2. Retira la copia local de `becomedigitalsdk.aar` para que tampoco se incluya mediante una regla `fileTree`.
 3. Si configuraste `flatDir` exclusivamente para este archivo, retíralo. Conserva los repositorios que necesiten otras dependencias de tu app.
-4. Retira las declaraciones manuales que agregaste exclusivamente como dependencias de BecomeDigital: ahora provienen del POM. Conserva las que tu aplicación utiliza directamente y revisa su compatibilidad si la resolución presenta un conflicto.
+4. Retira las declaraciones manuales que agregaste exclusivamente como dependencias de BecomeDigital: ahora provienen del POM. Conserva las que tu aplicación utiliza directamente y compáralas con la [referencia de dependencias compartidas](DEPENDENCIAS.md).
 5. Conserva `app/src/main/assets/com.become.blinkid.key`, los permisos, los recursos de localización y la configuración de desugaring de tu aplicación.
 
 ## Agregar la dependencia publicada
