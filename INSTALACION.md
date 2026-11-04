@@ -4,7 +4,7 @@
 
 | Requisito | Valor de referencia |
 | --- | --- |
-| Distribución de BecomeDigital | 1.3.0 |
+| Distribución de BecomeDigital | 3.5.1 |
 | Android mínimo | 7.0, API 24 |
 | Arquitecturas de captura | ARMv7 (`armeabi-v7a`) y ARM64 (`arm64-v8a`) |
 | `compileSdk` / `targetSdk` | 36 / 36 |

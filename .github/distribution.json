@@ -1,0 +1,47 @@
+{
+  "platform": "android",
+  "repository": "Becomedigital/BecomeDigitalSDKAutoCaptureOCR-Android",
+  "artifacts": [
+    "becomedigitalsdk.aar"
+  ],
+  "public_api": [
+    "BDIVConfig",
+    "BDIdentityVerificationResponse",
+    "BecomeInterfaseCallback"
+  ],
+  "integration": [
+    "scripts/prepare_maven_release.py",
+    "Demo/AndroidBlinkIDIntegration/app/build.gradle",
+    ".github/scripts/distribution.py",
+    ".github/distribution.json",
+    "CHECKSUMS.sha256",
+    "VERSION"
+  ],
+  "native_artifacts": [],
+  "android_demo": "Demo/AndroidBlinkIDIntegration",
+  "version_file": "VERSION",
+  "native_dependencies": [
+    {
+      "coordinate": "com.microblink:blinkid-core:8002.0.0",
+      "url": "https://repo.maven.apache.org/maven2/com/microblink/blinkid-core/8002.0.0/blinkid-core-8002.0.0.aar",
+      "sha256": "547935c32705698959d44a0120894c1dd9c85b130237961068539eaba2678d6f",
+      "requires_native": true
+    },
+    {
+      "coordinate": "com.microblink:blinkid-ux:8002.0.0",
+      "url": "https://repo.maven.apache.org/maven2/com/microblink/blinkid-ux/8002.0.0/blinkid-ux-8002.0.0.aar",
+      "sha256": "f896dbbf48850045721f0bb086809010728167b69871c3292a1cda7ef2d0567e",
+      "requires_native": false
+    }
+  ],
+  "required_class_references": [
+    "com/microblink/blinkid"
+  ],
+  "forbidden_class_references": [
+    "com/microblink/capture"
+  ],
+  "required_abis": [
+    "armeabi-v7a",
+    "arm64-v8a"
+  ]
+}
