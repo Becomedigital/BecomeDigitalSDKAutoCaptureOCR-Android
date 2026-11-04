@@ -1,5 +1,11 @@
 # Cambios de la SDK
 
+## 3.5.1-rc.1 — 2026-11-04
+
+### Correcciones
+
+- El identificador de versión integrado corresponde a la entrega 3.5.1 para facilitar el diagnóstico de integración.
+
 ## JWT por operación — 29 de octubre de 2026
 
 - Permite utilizar JWT diferentes para crear la verificación y consultar su resultado mediante `verificationResultsJwt`.
