@@ -12,7 +12,7 @@ Estos pasos permiten pasar de la integración de BecomeDigital mediante un AAR l
 
 ## Agregar la dependencia publicada
 
-Sigue la [instalación con Maven Central](INSTALACION.md): configura `google()` y `mavenCentral()`, agrega `ai.becomedigital:identity-verification:3.5.1-rc.1` y conserva el requisito de desugaring de la app. Gradle obtiene automáticamente las dependencias transitivas.
+Sigue la [instalación con Maven Central](INSTALACION.md): configura `google()` y `mavenCentral()`, agrega `ai.becomedigital:identity-verification:3.5.1-rc.2` y conserva el requisito de desugaring de la app. Gradle obtiene automáticamente las dependencias transitivas.
 
 Continúa con la [inicialización y configuración pública](README.md#iniciar-una-verificación). Si además vienes de una versión con firma de credenciales, consulta por separado la [migración a JWT](AUTENTICACION.md).
 
