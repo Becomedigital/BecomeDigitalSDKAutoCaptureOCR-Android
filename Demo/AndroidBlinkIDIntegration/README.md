@@ -1,11 +1,15 @@
 # Demo de integración para Android
 
-Esta aplicación utiliza el archivo de la SDK incluido en la raíz de esta distribución y la firma recomendada con JWT. Muestra cómo iniciar la verificación y recibir sus resultados desde una pantalla Jetpack Compose en una `AppCompatActivity`.
+Este ejemplo integra BecomeDigital con la firma recomendada con JWT e ilustra cómo iniciar la verificación y recibir sus resultados desde una actividad de ejemplo.
+
+## Usar la distribución publicada
+
+El proyecto de ejemplo conserva una referencia al archivo local incluido en esta distribución. Para consumir la versión publicada, aplica la [migración a Maven Central](../../MIGRACION.md) en este proyecto y sigue la [guía de instalación](../../INSTALACION.md). Selecciona exactamente `3.5.1-rc.1`; el gestor resuelve automáticamente las demás dependencias.
 
 ## Preparar el demo
 
 1. Abre este directorio en Android Studio. Usa JDK 21 para Gradle y Android SDK 36.
-2. En `app/build.gradle`, usa el identificador de aplicación autorizado para tu licencia BlinkID.
+2. En `app/build.gradle`, usa el identificador de aplicación autorizado para la licencia de tu app.
 3. Copia `credentials.properties.example` como `credentials.properties`. Completa `jwt` con el token de creación (`verification:create`), `verificationResultsJwt` con el de consulta (`verification:get`) y `contractId`.
 4. Agrega la licencia de tu app como `app/src/main/assets/com.become.blinkid.key`.
 5. Compila y ejecuta la app en un dispositivo físico con Android 7.0 o posterior. Ingresa un ID de usuario y toca **Iniciar verificación**.
