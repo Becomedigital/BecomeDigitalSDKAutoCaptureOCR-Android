@@ -1,14 +1,14 @@
 {
-  "version": "3.5.1-rc.1",
+  "version": "3.5.1-rc.2",
   "date": "2026-11-04",
   "candidate": "",
   "functional_validation": false,
   "inputs": {
     "becomedigitalsdk.aar": "26f25d6c2a5f905fd6f6bd97cef8937282c9c6fb9f504309b03b9e147825bc89",
-    "integration_sha256": "e776e38a5e29f127097fab21c32661016e66ef677f8e61f9356b6831e5b7b58c"
+    "integration_sha256": "5fb6587a7e90ab723a2b99da82bae77b0c7948695deb4568b9753c795de701c6"
   },
   "payload_sha256": [
     "1ac77dd5c7b43aae8fb9585401e9ff0229f745486fe035e8bdecdd0614904a66"
   ],
-  "notes_sha256": "c6b201f2dec9cded651112e039a3a379e231145d47285a43b1d708bd948c53bf"
+  "notes_sha256": "3f573bf179ddf3d7a110f080fe9673c432de85d4e83b0b2a12c07d21b0a1365d"
 }
