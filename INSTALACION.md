@@ -97,7 +97,7 @@ Incorpora estos bloques a la configuración existente de tu módulo. Conserva su
 
 La única dependencia de implementación que debes agregar para BecomeDigital es `ai.becomedigital:identity-verification`. El POM declara sus dependencias transitivas. `coreLibraryDesugaring` es una configuración de compilación de la app necesaria para utilizar las API de Java requeridas en las versiones de Android admitidas; configúrala además de la dependencia de BecomeDigital.
 
-Usa la versión exacta indicada, sin rangos ni versiones dinámicas. Conserva las dependencias que tu aplicación utiliza directamente; si existe un conflicto de versiones, revisa sus requisitos junto con soporte.
+Usa la versión exacta indicada, sin rangos ni versiones dinámicas. Conserva las dependencias que tu aplicación utiliza directamente. Antes de alinearlas o actualizarlas, compara las versiones declaradas, las resueltas y el alcance de compatibilidad en la [guía de dependencias compartidas](DEPENDENCIAS.md).
 
 Con Android Gradle Plugin 9.0.1 y el plugin Kotlin de esta configuración, conserva estas opciones de `gradle.properties`:
 

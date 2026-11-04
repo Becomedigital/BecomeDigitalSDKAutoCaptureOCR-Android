@@ -155,6 +155,7 @@ La respuesta dispone de `toJson()` si necesitas representarla como texto. Los er
 - [Demo de integración para Android](Demo/AndroidBlinkIDIntegration/README.md)
 - [Instalación con Maven Central, licencia y permisos](INSTALACION.md)
 - [Migración desde la integración por archivo](MIGRACION.md)
+- [Dependencias compartidas y compatibilidad de versiones](DEPENDENCIAS.md)
 - [Inicialización con JWT y firma deprecada](AUTENTICACION.md)
 - [Localización y claves admitidas](docs/PERSONALIZACION_TEXTOS.md)
 - [Resultados y errores](docs/ERRORES.md)
