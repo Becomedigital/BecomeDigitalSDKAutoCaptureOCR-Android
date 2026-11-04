@@ -1,8 +1,8 @@
 {
   "agregado": [],
-  "cambiado": [],
-  "corregido": [
-    "El identificador de versión integrado corresponde a la entrega 3.5.1 para facilitar el diagnóstico de integración."
+  "cambiado": [
+    "Esta versión candidata conserva la API de integración, la configuración pública y los resultados de verificación de 3.5.1-rc.1."
   ],
+  "corregido": [],
   "retirado": []
 }
