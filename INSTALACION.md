@@ -6,8 +6,8 @@ Agrega BecomeDigital como una dependencia de tu aplicación. Gradle consulta el 
 
 | Requisito | Valor de referencia |
 | --- | --- |
-| Versión publicada usada en esta guía | `3.5.1-rc.1` |
-| Coordenada Maven | `ai.becomedigital:identity-verification:3.5.1-rc.1` |
+| Versión publicada usada en esta guía | `3.5.1-rc.2` |
+| Coordenada Maven | `ai.becomedigital:identity-verification:3.5.1-rc.2` |
 | Android mínimo | 7.0, API 24 |
 | Arquitecturas admitidas | ARMv7 (`armeabi-v7a`) y ARM64 (`arm64-v8a`) |
 | `compileSdk` / `targetSdk` de referencia | 36 / 36 |
@@ -17,7 +17,7 @@ Agrega BecomeDigital como una dependencia de tu aplicación. Gradle consulta el 
 | Compatibilidad de Java y Kotlin | 11 |
 | Kotlin | 2.2.10 |
 
-`3.5.1-rc.1` es una versión candidata para evaluación. La versión interna de la biblioteca es `3.5.1`. Selecciona JDK 21 para Gradle en Android Studio al usar esta configuración; la compatibilidad Java 11 se refiere al código de la aplicación.
+`3.5.1-rc.2` es una versión candidata para evaluación. La versión interna de la biblioteca es `3.5.1`. Selecciona JDK 21 para Gradle en Android Studio al usar esta configuración; la compatibilidad Java 11 se refiere al código de la aplicación.
 
 ## 1. Configurar los repositorios
 
@@ -65,7 +65,7 @@ android {
 }
 
 dependencies {
-    implementation "ai.becomedigital:identity-verification:3.5.1-rc.1"
+    implementation "ai.becomedigital:identity-verification:3.5.1-rc.2"
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.5"
 }
 ```
@@ -88,7 +88,7 @@ android {
 }
 
 dependencies {
-    implementation("ai.becomedigital:identity-verification:3.5.1-rc.1")
+    implementation("ai.becomedigital:identity-verification:3.5.1-rc.2")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 }
 ```
@@ -129,7 +129,7 @@ La SDK incluye estas declaraciones. Solicita el permiso de cámara en tiempo de 
 
 ## 5. Comprobar la integración
 
-1. Sincroniza el proyecto en Android Studio y confirma que Gradle resuelva `ai.becomedigital:identity-verification:3.5.1-rc.1`.
+1. Sincroniza el proyecto en Android Studio y confirma que Gradle resuelva `ai.becomedigital:identity-verification:3.5.1-rc.2`.
 2. Sigue el [ejemplo de inicialización](README.md#iniciar-una-verificación) con los JWT y el contrato de tu integración.
 3. Compila las variantes de desarrollo y publicación de tu app. Si utilizas optimización, sigue la [configuración de R8](docs/R8.md).
 4. En un dispositivo físico compatible, revisa permisos, captura documental, validación facial, cancelación y resultados. Usa también la variante de publicación de tu app.
