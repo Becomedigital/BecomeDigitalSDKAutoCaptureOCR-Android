@@ -1,8 +1,12 @@
 {
   "agregado": [],
   "cambiado": [
-    "Esta versión candidata conserva la API de integración, la configuración pública y los resultados de verificación de 3.5.1-rc.1."
+    "Actualiza las ilustraciones de introducción de documento y rostro, conservando su transparencia y adaptación a los modos claro y oscuro.",
+    "La revisión del documento muestra un lado a la vez y permite navegar entre las imágenes, conservando sus proporciones en pantallas de distintos tamaños."
   ],
-  "corregido": [],
+  "corregido": [
+    "Evita que las imágenes del documento desborden el espacio disponible durante la revisión.",
+    "Solicita repetir la captura automática cuando falta la imagen necesaria para revisar el documento."
+  ],
   "retirado": []
 }
