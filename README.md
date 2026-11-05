@@ -17,14 +17,14 @@ Con `google()` y `mavenCentral()` configurados, agrega al módulo de tu app:
 
 ```groovy
 dependencies {
-    implementation "ai.becomedigital:identity-verification:3.5.1-rc.2"
+    implementation "ai.becomedigital:identity-verification:3.5.1"
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.5"
 }
 ```
 
 Gradle descarga BecomeDigital y resuelve automáticamente las dependencias descritas por el POM. Completa la [configuración de desugaring, la licencia de la app y los permisos](INSTALACION.md). Si vienes de un AAR local, sigue la [guía de migración](MIGRACION.md).
 
-`3.5.1-rc.2` es la versión candidata publicada que utiliza esta guía. Usa una versión exacta para tu integración.
+`3.5.1` es la versión oficial publicada. Consulta las [notas y descargas de esta versión](https://github.com/Becomedigital/BecomeDigitalSDKAutoCaptureOCR-Android/releases/tag/3.5.1) y usa una versión exacta para tu integración.
 
 ## Iniciar una verificación
 
@@ -169,4 +169,4 @@ Antes de publicar tu app, comprueba los permisos, la captura de los lados solici
 
 ## Condiciones de uso
 
-Para la versión candidata `3.5.1-rc.2`, consulta el [acuerdo de licencia propietaria provisional](legal/LICENSE-3.5.1-rc.2.txt). La integración no tiene un cargo separado por licencia; el acceso y consumo de los servicios se rigen por el contrato correspondiente.
+Para la versión `3.5.1`, consulta el [acuerdo de licencia propietaria provisional](legal/LICENSE-3.5.1.txt). La integración no tiene un cargo separado por licencia; el acceso y consumo de los servicios se rigen por el contrato correspondiente.
