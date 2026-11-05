@@ -1,5 +1,17 @@
 # Cambios de la SDK
 
+## 3.5.1-rc.3 — 2026-11-05
+
+### Cambios
+
+- Actualiza las ilustraciones de introducción de documento y rostro, conservando su transparencia y adaptación a los modos claro y oscuro.
+- La revisión del documento muestra un lado a la vez y permite navegar entre las imágenes, conservando sus proporciones en pantallas de distintos tamaños.
+
+### Correcciones
+
+- Evita que las imágenes del documento desborden el espacio disponible durante la revisión.
+- Solicita repetir la captura automática cuando falta la imagen necesaria para revisar el documento.
+
 ## 3.5.1-rc.2 — 2026-11-04
 
 ### Cambios
