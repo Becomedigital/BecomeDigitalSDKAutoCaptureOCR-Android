@@ -169,4 +169,4 @@ Antes de publicar tu app, comprueba los permisos, la captura de los lados solici
 
 ## Condiciones de uso
 
-Para la versión `3.5.1`, consulta el [acuerdo de licencia propietaria provisional](legal/LICENSE-3.5.1.txt). La integración no tiene un cargo separado por licencia; el acceso y consumo de los servicios se rigen por el contrato correspondiente.
+Para la versión `3.5.1`, consulta el [acuerdo de licencia propietaria oficial](legal/LICENSE-3.5.1.txt). La integración no tiene un cargo separado por licencia; el acceso y consumo de los servicios se rigen por el contrato correspondiente.

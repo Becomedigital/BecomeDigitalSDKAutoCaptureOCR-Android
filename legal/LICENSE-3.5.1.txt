@@ -1,6 +1,6 @@
 ACUERDO DE LICENCIA PROPIETARIA DE LAS SDK DE BECOME DIGITAL
 
-TÉRMINOS PROVISIONALES PARA LA DISTRIBUCIÓN ANDROID 3.5.1
+TÉRMINOS DE LICENCIA PARA LA DISTRIBUCIÓN ANDROID 3.5.1
 Versión del texto: 0.1
 Licenciante: Become Digital, en adelante «Become».
 
@@ -234,4 +234,4 @@ establecidos en el contrato correspondiente. A falta de estipulación contractua
 aplicable, se aplicarán las normas y competencias que correspondan conforme a
 la ley, sin afectar las que sean de aplicación obligatoria.
 
-FIN DEL ACUERDO PROVISIONAL
+FIN DEL ACUERDO
