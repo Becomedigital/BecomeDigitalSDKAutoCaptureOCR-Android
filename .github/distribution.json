@@ -43,5 +43,9 @@
   "required_abis": [
     "armeabi-v7a",
     "arm64-v8a"
-  ]
+  ],
+  "source": {
+    "repository": "Becomedigital/Android_become_sdk",
+    "commit": "c1fe4cc4d1a8eedb162c3184cd678e22a6f8909e"
+  }
 }
