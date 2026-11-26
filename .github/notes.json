@@ -1,9 +1,12 @@
 {
-  "agregado": [],
-  "cambiado": [
-    "Las imágenes completas del documento conservan las dimensiones de captura y se envían en JPEG de calidad máxima.",
-    "La captura automática solicita mayor resolución en equipos compatibles."
+  "agregado": [
+    "La revisión del documento permite abrir cada imagen en pantalla completa, ampliarla y desplazarse por ella."
   ],
-  "corregido": [],
+  "cambiado": [
+    "La captura conserva más detalle en las imágenes del documento durante la verificación."
+  ],
+  "corregido": [
+    "La captura muestra un indicador mientras se prepara la cámara y permite reintentar si la preparación falla."
+  ],
   "retirado": []
 }
