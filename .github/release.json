@@ -1,14 +1,14 @@
 {
-  "version": "3.5.1",
-  "date": "2026-11-05",
-  "candidate": "3.5.1-rc.3",
-  "functional_validation": true,
+  "version": "3.5.2-rc.1",
+  "date": "2026-11-26",
+  "candidate": "",
+  "functional_validation": false,
   "inputs": {
-    "becomedigitalsdk.aar": "dd6780e630fe1570ee932ce103834eba82b4c24c1910a74a9de8bfa50371d4a7",
-    "integration_sha256": "d4f1dae5480c590e99770a6015a1ffd4fa702babdf3e9333e51b9c1d5eabccef"
+    "becomedigitalsdk.aar": "80c8e88350a5ffa69714eb6c3e81667b8cff8177a0493fde2d8f6fa2e075bb65",
+    "integration_sha256": "7ce1d5fb35d50e965becafade4bc1c5bcf544b1be965808a1919db528b5c199c"
   },
   "payload_sha256": [
-    "10941c465e40f9d2965cb900a537c2f6ed3c60e2c11f1094fd1cb6e81039c052"
+    "dc91ad4e81cb71a1f93d7d588fe5921a197cdc01c68fce8348f3f9b4bb26031e"
   ],
-  "notes_sha256": "74fd2ffd1c5291d5efb40807abced075eea45a314b9c7300ff545a8a8bc4e7dd"
+  "notes_sha256": "52c7806bf33d545e7f381cb10ddba01edc8285be96c902754358e66c4340b64c"
 }
