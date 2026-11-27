@@ -7,7 +7,7 @@ Agrega BecomeDigital como una dependencia de tu aplicación. Gradle consulta el 
 | Requisito | Valor de referencia |
 | --- | --- |
 | Versión de BecomeDigital | Número exacto de la [última versión estable](https://github.com/Becomedigital/BecomeDigitalSDKAutoCaptureOCR-Android/releases/latest) |
-| Coordenada Maven | `ai.becomedigital:identity-verification:X.Y.Z` |
+| Coordenada Maven | `ai.becomedigital:identity-verification:<latest-version>` |
 | Android mínimo | 7.0, API 24 |
 | Arquitecturas admitidas | ARMv7 (`armeabi-v7a`) y ARM64 (`arm64-v8a`) |
 | `compileSdk` / `targetSdk` de referencia | 36 / 36 |
@@ -17,7 +17,7 @@ Agrega BecomeDigital como una dependencia de tu aplicación. Gradle consulta el 
 | Compatibilidad de Java y Kotlin | 11 |
 | Kotlin | 2.2.10 |
 
-En la coordenada Maven y en los ejemplos, reemplaza `X.Y.Z` por el número exacto de la publicación estable. Una versión fija mantiene la misma dependencia entre compilaciones.
+En la coordenada Maven y en los ejemplos, reemplaza `<latest-version>` por el número exacto de la publicación estable. Una versión fija mantiene la misma dependencia entre compilaciones.
 
 Selecciona JDK 21 para Gradle en Android Studio al usar esta configuración. La compatibilidad con Java 11 se refiere al código de la aplicación.
 
@@ -67,7 +67,7 @@ android {
 }
 
 dependencies {
-    implementation "ai.becomedigital:identity-verification:X.Y.Z"
+    implementation "ai.becomedigital:identity-verification:<latest-version>"
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.5"
 }
 ```
@@ -90,7 +90,7 @@ android {
 }
 
 dependencies {
-    implementation("ai.becomedigital:identity-verification:X.Y.Z")
+    implementation("ai.becomedigital:identity-verification:<latest-version>")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 }
 ```

@@ -13,11 +13,11 @@ Esta entrega corresponde a producción. La configuración de compilación de tu 
 
 ## Instalación con versión exacta
 
-Consulta la [última versión estable](https://github.com/Becomedigital/BecomeDigitalSDKAutoCaptureOCR-Android/releases/latest) y reemplaza `X.Y.Z` por el número exacto de esa publicación. Con `google()` y `mavenCentral()` configurados, agrega la dependencia al módulo de tu app:
+Consulta la [última versión estable](https://github.com/Becomedigital/BecomeDigitalSDKAutoCaptureOCR-Android/releases/latest) y reemplaza `<latest-version>` por el número exacto de esa publicación. Con `google()` y `mavenCentral()` configurados, agrega la dependencia al módulo de tu app:
 
 ```groovy
 dependencies {
-    implementation "ai.becomedigital:identity-verification:X.Y.Z"
+    implementation "ai.becomedigital:identity-verification:<latest-version>"
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.5"
 }
 ```
