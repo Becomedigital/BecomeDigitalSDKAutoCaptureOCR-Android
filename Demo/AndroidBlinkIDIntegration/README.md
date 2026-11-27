@@ -4,7 +4,7 @@ Este ejemplo integra BecomeDigital con la firma recomendada con JWT e ilustra c�
 
 ## Usar la distribución publicada
 
-El proyecto de ejemplo conserva una referencia al archivo local incluido en esta distribución. Para consumir la versión publicada, aplica la [migración a Maven Central](../../MIGRACION.md) en este proyecto y sigue la [guía de instalación](../../INSTALACION.md). Selecciona exactamente `3.5.1`; el gestor resuelve automáticamente las demás dependencias.
+El proyecto de ejemplo conserva una referencia al archivo local incluido en esta distribución. Para consumir la versión publicada, aplica la [migración a Maven Central](../../MIGRACION.md) en este proyecto y sigue la [guía de instalación](../../INSTALACION.md). Fija el número exacto de la [última versión estable](https://github.com/Becomedigital/BecomeDigitalSDKAutoCaptureOCR-Android/releases/latest); el gestor resuelve automáticamente las demás dependencias.
 
 ## Preparar el demo
 

@@ -13,18 +13,16 @@ Esta entrega corresponde a producción. La configuración de compilación de tu 
 
 ## Instalación con versión exacta
 
-Con `google()` y `mavenCentral()` configurados, agrega al módulo de tu app:
+Consulta la [última versión estable](https://github.com/Becomedigital/BecomeDigitalSDKAutoCaptureOCR-Android/releases/latest) y reemplaza `<latest-version>` por el número exacto de esa publicación. Con `google()` y `mavenCentral()` configurados, agrega la dependencia al módulo de tu app:
 
 ```groovy
 dependencies {
-    implementation "ai.becomedigital:identity-verification:3.5.1"
+    implementation "ai.becomedigital:identity-verification:<latest-version>"
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.5"
 }
 ```
 
 Gradle descarga BecomeDigital y resuelve automáticamente las dependencias descritas por el POM. Completa la [configuración de desugaring, la licencia de la app y los permisos](INSTALACION.md). Si vienes de un AAR local, sigue la [guía de migración](MIGRACION.md).
-
-`3.5.1` es la versión oficial publicada. Consulta las [notas y descargas de esta versión](https://github.com/Becomedigital/BecomeDigitalSDKAutoCaptureOCR-Android/releases/tag/3.5.1) y usa una versión exacta para tu integración.
 
 ## Iniciar una verificación
 
