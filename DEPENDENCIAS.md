@@ -1,6 +1,6 @@
 # Dependencias compartidas y compatibilidad en Android
 
-Esta guía corresponde a `ai.becomedigital:identity-verification:3.5.1`. Gradle descarga automáticamente sus dependencias desde el POM. Usa este inventario para comparar las bibliotecas generales que tu aplicación ya utiliza; no es una lista para agregarlas de nuevo al módulo.
+Gradle descarga automáticamente las dependencias de BecomeDigital desde el POM de la versión que fijaste. Usa este inventario de referencia para comparar las bibliotecas generales con las que ya utiliza tu aplicación.
 
 ## Versión declarada y versión que utiliza la app
 
@@ -10,7 +10,7 @@ Por eso, escribir una versión en el POM no fija por sí solo toda la combinaci�
 
 ## Bibliotecas generales declaradas en el POM
 
-Los valores corresponden al [POM público de `3.5.1`](https://repo.maven.apache.org/maven2/ai/becomedigital/identity-verification/3.5.1/identity-verification-3.5.1.pom).
+Los valores de la tabla corresponden al [POM de referencia de `3.5.1`](https://repo.maven.apache.org/maven2/ai/becomedigital/identity-verification/3.5.1/identity-verification-3.5.1.pom). Consulta en [Maven Central](https://central.sonatype.com/artifact/ai.becomedigital/identity-verification) el POM de la versión exacta que integraste.
 
 | Coordenada | Versión solicitada por el POM |
 | --- | --- |
